@@ -1,0 +1,14 @@
+-npm install
+When you clone this project, run the 'npm install' command to install the project dependencies
+
+-npm install material-icons // the rigth (i think)
+    -npm install @material-ui/core
+    -npm install --save material-ui-icons
+
+
+-npm install axios
+
+-npm install --save react-router-dom
+
+
+-npm install @material-ui/icons
