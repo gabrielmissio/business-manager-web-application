@@ -1,23 +1,31 @@
-# Getting Started with Create React App
+# business-manager-api
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Web Application to help manage business and work flow
+
+## git 
+
+* **master**: this branch contains production code. All development code is merged into master in sometime.
+
+* **dev**: this branch contains pre-production code. When the features are finished then they are merged into develop.
+
+* **feat/{feature_name}**: feature branches are used to develop new features for the upcoming releases. May branch off from develop and must merge into develop.
+
+* **hotfix/{bug_name}**: hotfix branches are necessary to act immediately upon an undesired status of master. May branch off from master and must merge into master anddevelop.
+
+* **release{version}**: release branches support preparation of a new production release. They allow many minor bug to be fixed and preparation of meta-data for a release. May branch off from develop and must merge into master anddevelop.
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run
+
+### `npm intall`
+
+Installs project dependencies
 
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -45,13 +53,6 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
 ### Making a Progressive Web App
 
