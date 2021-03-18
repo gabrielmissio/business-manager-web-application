@@ -12,17 +12,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 function CreateClientForm() {
 
-    const handleRadioChange = (event) => {
+    const [value, setValue] = React.useState('np');
+
+    const handleChangeRadio = (event) => {
         setValue(event.target.value);
-        setHelperText(' ');
-        setError(false);
     };
-    const [value, setValue] = React.useState('');
-    const [error, setError] = React.useState(false); 
-    const [helperText, setHelperText] = React.useState('Choose wisely');
    
   return(
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
         <form>
           <Grid container direction="column" justify="space-between" alignItems="flex-start" spacing={4}>
             <Grid  container item xs={12} alignItems="flex-start" justify="center">
@@ -32,7 +29,13 @@ function CreateClientForm() {
                 </Box>
               </Typography>            
             </Grid>
+            
             <Grid container item xs={12}>
+                <Typography color="primary" variant="h6" component="h2" >
+                    Identificação
+                    <hr/>
+                </Typography>
+
                 <TextField size="small" variant="outlined" fullWidth name="name" label="Name"/>
             </Grid>
             <Grid container item xs={12}>
@@ -42,10 +45,48 @@ function CreateClientForm() {
                 <TextField size="small" variant="outlined" fullWidth name="name" label="Data de nascimento"/>
             </Grid>
             <Grid container item xs={12}>
-                <RadioGroup  row aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-                    <FormControlLabel  value="best" control={<Radio color="primary" />} label="PF" />
-                    <FormControlLabel value="worst" control={<Radio color="primary"/>} label="PJ" />
+                <RadioGroup row aria-label="gender" name="gender1" value={value} onChange={handleChangeRadio}>
+                    <FormControlLabel value="np" control={<Radio color="primary"/>} label="PF" />
+                    <FormControlLabel value="lp" control={<Radio color="primary"/>} label="PJ" />
                 </RadioGroup>          
+            </Grid>
+
+            <Grid container item xs={12}>
+                <Typography color="primary" variant="h6" component="h2" >
+                    Endereço
+                    <hr/>
+                </Typography>
+
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Pais"/>
+            </Grid>
+            <Grid container item xs={12}>
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Estado"/>
+            </Grid>
+            <Grid container item xs={12}>
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Cidade"/>
+            </Grid>
+            <Grid container item xs={12}>
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Bairo"/>
+            </Grid>
+            <Grid container item xs={12}>
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Rua"/>
+            </Grid>
+            <Grid container item xs={12}>
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Numero"/>
+            </Grid>
+            <Grid container item xs={12}>
+                <Typography color="primary" variant="h6" component="h2" >
+                    Contato
+                    <hr/>
+                </Typography>
+
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Email"/>
+            </Grid>
+            <Grid container item xs={12}>
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Telefone 1"/>
+            </Grid>
+            <Grid container item xs={12}>
+                <TextField size="small" variant="outlined" fullWidth name="name" label="Telefone 2"/>
             </Grid>
             <Grid container item xs={12}>
                 <Button
