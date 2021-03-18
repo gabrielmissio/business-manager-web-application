@@ -26,6 +26,7 @@ import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import NotFound from './NotFound'; 
 import WorkflowDashboard from '../components/workflow/WorkflowDashboard'
 import CreateClientForm from '../components/CreateClientForm/CreateClientForm'
+import Paper from '@material-ui/core/Paper';
 
 import {
   BrowserRouter as Router,
@@ -220,11 +221,14 @@ export default function Home() {
           })}
         > 
         <div className={classes.drawerHeader} />
-        <Switch>
-          <Route exact path="/" component={WorkflowDashboard}/>
-          <Route exact path="/cadastro-de-cliente" component={CreateClientForm}/>
-          <Route exact path="/*" component={NotFound}/>
-        </Switch>
+        <Paper style={{ padding: 26, minHeight: '80.8vh'}} elevation={3} >
+
+          <Switch>
+            <Route exact path="/" component={WorkflowDashboard}/>
+            <Route exact path="/cadastro-de-cliente" component={CreateClientForm}/>
+            <Route exact path="/*" component={NotFound}/>
+          </Switch>
+        </Paper>
         </main>
       </div>
     </Router>
