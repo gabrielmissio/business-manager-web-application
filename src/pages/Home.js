@@ -15,7 +15,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Grid } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -23,12 +22,10 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import { NavLink } from 'react-router-dom'
 import HomeIcon from '@material-ui/icons/Home';
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import SwapVerticalCircleIcon from '@material-ui/icons/SwapVerticalCircle';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import NotFound from './NotFound'; 
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import WorkflowDashboard from '../components/workflow/WorkflowDashboard'
+import CreateClientForm from '../components/CreateClientForm/CreateClientForm'
 
 import {
   BrowserRouter as Router,
@@ -182,27 +179,27 @@ export default function Home() {
                 <ListItemText primary={"Home"} />
               </ListItem>
             </NavLink> 
-            <NavLink to={"/cash-flow"} style={{ textDecoration: 'none', color: "inherit" }}>
+            <NavLink to={"/cadastro-de-cliente"} style={{ textDecoration: 'none', color: "inherit" }}>
               <ListItem button>
-                <ListItemIcon>{<AccountBalanceWalletIcon />}</ListItemIcon>
-                <ListItemText primary={"Cash Flow"} />
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
+                <ListItemText primary={"Cadastrar Cliente"} />
               </ListItem>
             </NavLink>  
             <NavLink to={"/list-register"} style={{ textDecoration: 'none', color: "inherit" }}>
               <ListItem button>
-                <ListItemIcon>{<SwapVerticalCircleIcon />}</ListItemIcon>
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
                 <ListItemText primary={"List Registers"} />
               </ListItem>
             </NavLink>  
             <NavLink  to={"/list-tag"} style={{ textDecoration: 'none', color: "inherit" }}>
               <ListItem button>
-                <ListItemIcon>{<LocalOfferIcon />}</ListItemIcon>
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
                 <ListItemText primary={"List Tags"} />
               </ListItem>
             </NavLink>  
             <NavLink  to={"/create-tag"} style={{ textDecoration: 'none', color: "inherit" }}>
               <ListItem button>
-                <ListItemIcon>{<AddCircleIcon />}</ListItemIcon>
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
                 <ListItemText primary={"Create Tag"} />
               </ListItem>
             </NavLink>             
@@ -211,13 +208,13 @@ export default function Home() {
           <List>
             {['-----', '-----', '-----'].map((text, index) => (
               <ListItem button key={text}>
-                <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             ))}
           </List>
         </Drawer>
-        <main
+        <main 
           className={clsx(classes.content, {
             [classes.contentShift]: open,
           })}
@@ -225,6 +222,7 @@ export default function Home() {
         <div className={classes.drawerHeader} />
         <Switch>
           <Route exact path="/" component={WorkflowDashboard}/>
+          <Route exact path="/cadastro-de-cliente" component={CreateClientForm}/>
           <Route exact path="/*" component={NotFound}/>
         </Switch>
         </main>
