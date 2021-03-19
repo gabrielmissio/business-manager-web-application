@@ -19,9 +19,9 @@ function CreateClientForm() {
     };
    
   return(
-    <Container maxWidth="md">
+    <Container maxWidth="sm">
         <form>
-          <Grid container direction="column" justify="space-between" alignItems="flex-start" spacing={4}>
+          <Grid container direction="column" justify="space-between" alignItems="flex-start">
             <Grid  container item xs={12} alignItems="flex-start" justify="center">
               <Typography color="primary" variant="h6" align="center" component="h2"  alignItems="center" justify="center">
                 <Box fontWeight="fontWeightBold">
@@ -29,66 +29,87 @@ function CreateClientForm() {
                 </Box>
               </Typography>            
             </Grid>
-            
-            <Grid container item xs={12}>
+            <br/>
+            <br/>
+            <Grid container xs={12}>
                 <Typography color="primary" variant="h6" component="h2" >
                     Identificação
                     <hr/>
                 </Typography>
 
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Name"/>
             </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Documento"/>
-            </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Data de nascimento"/>
-            </Grid>
-            <Grid container item xs={12}>
-                <RadioGroup row aria-label="gender" name="gender1" value={value} onChange={handleChangeRadio}>
-                    <FormControlLabel value="np" control={<Radio color="primary"/>} label="PF" />
-                    <FormControlLabel value="lp" control={<Radio color="primary"/>} label="PJ" />
-                </RadioGroup>          
+            <br/>
+            <Grid container spacing={4}>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Name"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Documento"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Data de nascimento"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <Grid container item xs={12} >
+                        <RadioGroup row aria-label="gender" name="gender1" value={value} onChange={handleChangeRadio}>
+                            <FormControlLabel value="np" control={<Radio color="primary"/>} label="PF" />
+                            <FormControlLabel value="lp" control={<Radio color="primary"/>} label="PJ" />
+                        </RadioGroup>       
+                    </Grid>   
+                </Grid>
             </Grid>
 
-            <Grid container item xs={12}>
+
+            <br/>
+            <Grid container xs={12}>
                 <Typography color="primary" variant="h6" component="h2" >
                     Endereço
                     <hr/>
                 </Typography>
+            </Grid>
+            <br/>
+            <Grid container spacing={4}>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Pais"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Estado"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Cidade"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Bairo"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Rua"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Numero"/>
+                </Grid>
+            </Grid>
 
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Pais"/>
-            </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Estado"/>
-            </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Cidade"/>
-            </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Bairo"/>
-            </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Rua"/>
-            </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Numero"/>
-            </Grid>
-            <Grid container item xs={12}>
+            <br/>
+            <Grid container xs={12}>
                 <Typography color="primary" variant="h6" component="h2" >
                     Contato
                     <hr/>
                 </Typography>
-
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Email"/>
             </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Telefone 1"/>
+            <br/>
+            <Grid container spacing={4}>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Email"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Telefone 1"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" variant="outlined" fullWidth name="name" label="Telefone 2"/>
+                </Grid>
             </Grid>
-            <Grid container item xs={12}>
-                <TextField size="small" variant="outlined" fullWidth name="name" label="Telefone 2"/>
-            </Grid>
-            <Grid container item xs={12}>
+            <br/>
+            <Grid container xs={12} sm={12}>
                 <Button
                 disableElevation
                 variant="contained"
