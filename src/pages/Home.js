@@ -26,6 +26,8 @@ import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import NotFound from './NotFound'; 
 import WorkflowDashboard from '../components/workflow/WorkflowDashboard'
 import CreateClientForm from '../components/CreateClientForm/CreateClientForm'
+import CreateSubprocessForm from '../components/CreateSubprocessForm/CreateSubprocessForm'
+import CreateProcessForm from '../components/CreateProcessForm/CreateProcessForm'
 import Paper from '@material-ui/core/Paper';
 
 import {
@@ -186,16 +188,16 @@ export default function Home() {
                 <ListItemText primary={"Cadastrar Cliente"} />
               </ListItem>
             </NavLink>  
-            <NavLink to={"/list-register"} style={{ textDecoration: 'none', color: "inherit" }}>
+            <NavLink to={"/cadastro-de-subprocesso"} style={{ textDecoration: 'none', color: "inherit" }}>
               <ListItem button>
                 <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
-                <ListItemText primary={"List Registers"} />
+                <ListItemText primary={"Cadastrar Subprocesso"} />
               </ListItem>
             </NavLink>  
-            <NavLink  to={"/list-tag"} style={{ textDecoration: 'none', color: "inherit" }}>
+            <NavLink  to={"/cadastro-de-processo"} style={{ textDecoration: 'none', color: "inherit" }}>
               <ListItem button>
                 <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
-                <ListItemText primary={"List Tags"} />
+                <ListItemText primary={"Cadastrar Processo"} />
               </ListItem>
             </NavLink>  
             <NavLink  to={"/create-tag"} style={{ textDecoration: 'none', color: "inherit" }}>
@@ -226,6 +228,8 @@ export default function Home() {
           <Switch>
             <Route exact path="/" component={WorkflowDashboard}/>
             <Route exact path="/cadastro-de-cliente" component={CreateClientForm}/>
+            <Route exact path="/cadastro-de-subprocesso" component={CreateSubprocessForm}/>
+            <Route exact path="/cadastro-de-processo" component={CreateProcessForm}/>
             <Route exact path="/*" component={NotFound}/>
           </Switch>
         </Paper>
