@@ -58,9 +58,19 @@ function CreateProcessForm() {
                 <Grid item xs={12} sm={12}>
                     <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome"/>
                 </Grid>
-                <Grid item xs={12}> 
+            </Grid>
+            <br/>
+            <Grid container xs={12}>
+                <Typography color="primary" variant="h6" component="h2" >
+                    Subprocessos
+                    <hr/>
+                </Typography>
+            </Grid>
+            <br/>
+            <Grid container spacing={4}>
+              <Grid item xs={12}> 
                   <AsyncSelect cacheOptions defaultOptions loadOptions={getOptions} onChange={handleChangeCombo} isMulti/>
-                </Grid>
+              </Grid>
             </Grid>
             <br/>
             <Grid container xs={12} sm={12}>
