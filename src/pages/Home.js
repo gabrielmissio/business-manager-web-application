@@ -28,6 +28,7 @@ import WorkflowDashboard from '../components/workflow/WorkflowDashboard'
 import CreateClientForm from '../components/CreateClientForm/CreateClientForm'
 import CreateSubprocessForm from '../components/CreateSubprocessForm/CreateSubprocessForm'
 import CreateProcessForm from '../components/CreateProcessForm/CreateProcessForm'
+import CreateUserForm from '../components/CreateUserForm/CreateUserForm'
 import Paper from '@material-ui/core/Paper';
 
 import {
@@ -200,10 +201,10 @@ export default function Home() {
                 <ListItemText primary={"Cadastrar Processo"} />
               </ListItem>
             </NavLink>  
-            <NavLink  to={"/create-tag"} style={{ textDecoration: 'none', color: "inherit" }}>
+            <NavLink  to={"/cadastro-de-usuario"} style={{ textDecoration: 'none', color: "inherit" }}>
               <ListItem button>
                 <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
-                <ListItemText primary={"Create Tag"} />
+                <ListItemText primary={"Cadastrar Usuario"} />
               </ListItem>
             </NavLink>             
           </List>
@@ -230,6 +231,7 @@ export default function Home() {
             <Route exact path="/cadastro-de-cliente" component={CreateClientForm}/>
             <Route exact path="/cadastro-de-subprocesso" component={CreateSubprocessForm}/>
             <Route exact path="/cadastro-de-processo" component={CreateProcessForm}/>
+            <Route exact path="/cadastro-de-usuario" component={CreateUserForm}/>
             <Route exact path="/*" component={NotFound}/>
           </Switch>
         </Paper>

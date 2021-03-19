@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -22,8 +22,8 @@ async function getOptions(){
   return options
 }
 
-function CreateProcessForm() {
-  
+function CreateUserForm() {
+
   const handleChangeCombo = (e) => {
     var a = {value:e}
     var b = a.value
@@ -38,7 +38,7 @@ function CreateProcessForm() {
             <Grid  container item xs={12} alignItems="flex-start" justify="center">
               <Typography color="primary" variant="h6" align="center" component="h2"  alignItems="center" justify="center">
                 <Box fontWeight="fontWeightBold">
-                CADASTRAR PROCESSO
+                CADASTRAR USUARIO
                 </Box>
               </Typography>            
             </Grid>
@@ -53,14 +53,20 @@ function CreateProcessForm() {
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={6}>
                     <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome de usuario"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Email"/>
                 </Grid>
             </Grid>
             <br/>
             <Grid container xs={12}>
                 <Typography color="primary" variant="h6" component="h2" >
-                    Subprocessos
+                    Permições
                     <hr/>
                 </Typography>
             </Grid>
@@ -91,4 +97,4 @@ function CreateProcessForm() {
     )
 }
 
-export default CreateProcessForm;
+export default CreateUserForm;
