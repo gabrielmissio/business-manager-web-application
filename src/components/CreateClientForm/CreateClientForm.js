@@ -26,13 +26,22 @@ function CreateClientForm() {
         var name = event.target.name.value
         var document = event.target.document.value
         var birthdate = event.target.birthdate.value
-        //outros 
-
-        //nome, documento, pf pj
+        //address 
+        var country = event.target.country.value
+        var province = event.target.province.value
+        var city = event.target.city.value
+        var zip = event.target.zip.value
+        var street = event.target.street.value
+        var address_number = event.target.address_number.value
+        //contact
+        var email = event.target.email.value
+        var phone1 = event.target.phone1.value
+        var phone2 = event.target.phone2.value
+        
         event.preventDefault();
     
         var axios = require('axios');
-        var data = JSON.stringify({"name":name, "type":type, "document":document, "birthdate":birthdate});
+        var data = JSON.stringify({"name":name, "type":type, "document":document, "birthdate":birthdate, "address":{"country": country, "province": province, "city": city, "zip": zip, "street": street, "address_number": address_number}, "phones":[{"phone_numer": phone1},{"phone_numer": phone2}]});
         
         var config = {
             method: 'post',
@@ -108,22 +117,22 @@ function CreateClientForm() {
             <br/>
             <Grid container spacing={4}>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name1" label="Pais"/>
+                    <TextField size="small" variant="outlined" fullWidth name="country" label="Pais"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name2" label="Estado"/>
+                    <TextField size="small" variant="outlined" fullWidth name="province" label="Estado"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name3" label="Cidade"/>
+                    <TextField size="small" variant="outlined" fullWidth name="city" label="Cidade"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name4" label="Bairo"/>
+                    <TextField size="small" variant="outlined" fullWidth name="zip" label="CEP"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name5" label="Rua"/>
+                    <TextField size="small" variant="outlined" fullWidth name="street" label="Rua"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name6" label="Numero"/>
+                    <TextField size="small" variant="outlined" fullWidth name="address_number" label="Numero"/>
                 </Grid>
             </Grid>
 
@@ -137,13 +146,13 @@ function CreateClientForm() {
             <br/>
             <Grid container spacing={4}>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name7" label="Email"/>
+                    <TextField size="small" variant="outlined" fullWidth name="email" label="Email"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name8" label="Telefone 1"/>
+                    <TextField size="small" variant="outlined" fullWidth name="phone1" label="Telefone 1"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="name9" label="Telefone 2"/>
+                    <TextField size="small" variant="outlined" fullWidth name="phone2" label="Telefone 2"/>
                 </Grid>
             </Grid>
             <br/>
