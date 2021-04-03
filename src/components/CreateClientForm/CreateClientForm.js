@@ -10,11 +10,11 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-var type = 'np'
+var type = 'NP'
 
 function CreateClientForm() {
 
-    const [value, setValue] = React.useState('np');
+    const [value, setValue] = React.useState('NP');
 
     const handleChangeRadio = (event) => {
         setValue(event.target.value);
@@ -33,6 +33,7 @@ function CreateClientForm() {
     
         var axios = require('axios');
         var data = JSON.stringify({"name":name, "type":type, "document":document, "birthdate":birthdate});
+        
         var config = {
             method: 'post',
             url: 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client',
@@ -89,8 +90,8 @@ function CreateClientForm() {
                 <Grid item xs={12} sm={6}>
                     <Grid container item xs={12} >
                         <RadioGroup row aria-label="gender" name="gender1" value={value} onChange={handleChangeRadio}>
-                            <FormControlLabel value="np" control={<Radio color="primary"/>} label="PF" />
-                            <FormControlLabel value="lp" control={<Radio color="primary"/>} label="PJ" />
+                            <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />
+                            <FormControlLabel value="LP" control={<Radio color="primary"/>} label="PJ" />
                         </RadioGroup>       
                     </Grid>   
                 </Grid>
