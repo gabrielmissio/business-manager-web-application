@@ -6,42 +6,63 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import AsyncSelect from 'react-select/async';
 
-var type = 'NP'
+// const loadOptions = () => {
+//     return ['abc', 'dfg']
+//   };
 
-function CreateClientForm() {
+async function loadOptionsClients(){
+//get subprocess
+    var axios = require('axios');
+    const res = await axios.get('https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client')
+    const data = res.data
 
-    const [value, setValue] = React.useState('NP');
+    const options = data.clients.map(d => ({
+        "value" : d.id,
+        "label" : d.name
+    }))
+    return options
+}
+async function loadOptionsProcess(){
+    //get subprocess
+    var axios = require('axios');
+    const res = await axios.get('https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process')
+    const data = res.data
 
-    const handleChangeRadio = (event) => {
-        setValue(event.target.value);
-        type = event.target.value
-    };
+    const options = data.process.map(d => ({
+        "value" : d.id,
+        "label" : d.name
+    }))
+    return options
+}
+
+async function loadOptionsSubprocess(){
+    //get subprocess
+    var axios = require('axios');
+    const res = await axios.get('https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/subprocess')
+    const data = res.data
+
+    const options = data.subprocess.map(d => ({
+        "value" : d.id,
+        "label" : d.name
+    }))
+    return options
+}
+function CreateServiceOrderForm() {
+
     const handleSubmit = event => {
         
         //indentification
         var name = event.target.name.value
         var document = event.target.document.value
-        var birthdate = event.target.birthdate.value
-        //address 
-        var country = event.target.country.value
-        var province = event.target.province.value
-        var city = event.target.city.value
-        var zip = event.target.zip.value
-        var street = event.target.street.value
-        var address_number = event.target.address_number.value
-        //contact
-        var email = event.target.email.value
-        var phone1 = event.target.phone1.value
-        var phone2 = event.target.phone2.value
+        var birthdate = event.target.birthdat
         
         event.preventDefault();
     
         var axios = require('axios');
-        var data = JSON.stringify({"name":name, "type":type, "document":document, "birthdate":birthdate, "address":{"country": country, "province": province, "city": city, "zip": zip, "street": street, "address_number": address_number}, "email": email,"phones":[{"phone_numer": phone1},{"phone_numer": phone2}]});
+        var data = JSON.stringify({"name":name, "document":document, "birthdate":birthdate});
         
         var config = {
             method: 'post',
@@ -72,7 +93,7 @@ function CreateClientForm() {
             <Grid  container item xs={12} alignItems="flex-start" justify="center">
               <Typography color="primary" variant="h6" align="center" component="h2"  alignItems="center" justify="center">
                 <Box fontWeight="fontWeightBold">
-                CADASTRAR CLIENTE
+                CADASTRAR ORDEM DE SERVICO
                 </Box>
               </Typography>            
             </Grid>
@@ -80,82 +101,47 @@ function CreateClientForm() {
             <br/>
             <Grid container xs={12}>
                 <Typography color="primary" variant="h6" component="h2" >
-                    Identificação
+                    Cliente
                     <hr/>
                 </Typography>
 
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Name"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="document" label="Documento"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Grid container item xs={12} >
-                        <RadioGroup row aria-label="gender" name="gender1" value={value} onChange={handleChangeRadio}>
-                            <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />
-                            <FormControlLabel value="LP" control={<Radio color="primary"/>} label="PJ" />
-                        </RadioGroup>       
-                    </Grid>   
+                <Grid item xs={12} sm={12}>
+                    <AsyncSelect cacheOptions defaultOptions loadOptions={loadOptionsClients}/>                              
                 </Grid>
             </Grid>
-
-
             <br/>
             <Grid container xs={12}>
                 <Typography color="primary" variant="h6" component="h2" >
-                    Endereço
+                    Processo
                     <hr/>
                 </Typography>
+
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="country" label="Pais"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="province" label="Estado"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="city" label="Cidade"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="zip" label="CEP"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="street" label="Rua"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="address_number" label="Numero"/>
+                <Grid item xs={12} sm={12}>
+                    <AsyncSelect cacheOptions defaultOptions loadOptions={loadOptionsProcess}/>                              
                 </Grid>
             </Grid>
-
             <br/>
             <Grid container xs={12}>
                 <Typography color="primary" variant="h6" component="h2" >
-                    Contato
+                    Subprocesso
                     <hr/>
                 </Typography>
+
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="email" label="Email"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="phone1" label="Telefone 1"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="phone2" label="Telefone 2"/>
+                <Grid item xs={12} sm={12}>
+                    <AsyncSelect cacheOptions defaultOptions loadOptions={loadOptionsSubprocess}/>                              
                 </Grid>
             </Grid>
             <br/>
+
             <Grid container xs={12} sm={12}>
                 <Button
                 type="submit"
@@ -177,4 +163,4 @@ function CreateClientForm() {
     )
 }
 
-export default CreateClientForm;
+export default CreateServiceOrderForm;

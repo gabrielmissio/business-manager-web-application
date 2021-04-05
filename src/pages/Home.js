@@ -29,6 +29,7 @@ import CreateClientForm from '../components/CreateClientForm/CreateClientForm'
 import CreateSubprocessForm from '../components/CreateSubprocessForm/CreateSubprocessForm'
 import CreateProcessForm from '../components/CreateProcessForm/CreateProcessForm'
 import CreateUserForm from '../components/CreateUserForm/CreateUserForm'
+import CreateServiceOrderForm from '../components/CreateServiceOrderForm/CreateServiceOrderForm'
 import Paper from '@material-ui/core/Paper';
 
 import {
@@ -206,7 +207,13 @@ export default function Home() {
                 <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
                 <ListItemText primary={"Cadastrar Usuario"} />
               </ListItem>
-            </NavLink>             
+            </NavLink>
+            <NavLink  to={"/cadastro-de-ordem-de-servico"} style={{ textDecoration: 'none', color: "inherit" }}>
+              <ListItem button>
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
+                <ListItemText primary={"Cadastrar O.S."} />
+              </ListItem>
+            </NavLink>               
           </List>
           <Divider />
           <List>
@@ -232,6 +239,7 @@ export default function Home() {
             <Route exact path="/cadastro-de-subprocesso" component={CreateSubprocessForm}/>
             <Route exact path="/cadastro-de-processo" component={CreateProcessForm}/>
             <Route exact path="/cadastro-de-usuario" component={CreateUserForm}/>
+            <Route exact path="/cadastro-de-ordem-de-servico" component={CreateServiceOrderForm}/>
             <Route exact path="/*" component={NotFound}/>
           </Switch>
         </Paper>
