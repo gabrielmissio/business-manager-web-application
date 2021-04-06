@@ -30,6 +30,8 @@ import CreateSubprocessForm from '../components/CreateSubprocessForm/CreateSubpr
 import CreateProcessForm from '../components/CreateProcessForm/CreateProcessForm'
 import CreateUserForm from '../components/CreateUserForm/CreateUserForm'
 import CreateServiceOrderForm from '../components/CreateServiceOrderForm/CreateServiceOrderForm'
+import CreateRegisterMessageForm from '../components/CreateRegisterForms/CreateRegisterMessageForm'
+import CreateRegisterProcessSubprocessForm from '../components/CreateRegisterForms/CreateRegisterProcessSubprocessForm'
 import Paper from '@material-ui/core/Paper';
 
 import {
@@ -213,7 +215,19 @@ export default function Home() {
                 <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
                 <ListItemText primary={"Cadastrar O.S."} />
               </ListItem>
-            </NavLink>               
+            </NavLink>         
+            <NavLink  to={"/adicionar-registro/mensagem"} style={{ textDecoration: 'none', color: "inherit" }}>
+              <ListItem button>
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
+                <ListItemText primary={"Adicionar Mensagem"} />
+              </ListItem>
+            </NavLink>
+            <NavLink  to={"/adicionar-registro/alterar-processo-subprocesso"} style={{ textDecoration: 'none', color: "inherit" }}>
+              <ListItem button>
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
+                <ListItemText primary={"Alterar Processo/Subprocesso"} />
+              </ListItem>
+            </NavLink>            
           </List>
           <Divider />
           <List>
@@ -240,6 +254,8 @@ export default function Home() {
             <Route exact path="/cadastro-de-processo" component={CreateProcessForm}/>
             <Route exact path="/cadastro-de-usuario" component={CreateUserForm}/>
             <Route exact path="/cadastro-de-ordem-de-servico" component={CreateServiceOrderForm}/>
+            <Route exact path="/adicionar-registro/mensagem" component={CreateRegisterMessageForm}/>
+            <Route exact path="/adicionar-registro/alterar-processo-subprocesso" component={CreateRegisterProcessSubprocessForm}/>
             <Route exact path="/*" component={NotFound}/>
           </Switch>
         </Paper>
