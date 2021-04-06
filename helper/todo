@@ -1,2 +1,3 @@
 -add validation on all forms
+-change options on subpross options when change process select value
 -refactor project using adapter pattern and contexts
