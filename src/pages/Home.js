@@ -32,6 +32,7 @@ import CreateUserForm from '../components/CreateUserForm/CreateUserForm'
 import CreateServiceOrderForm from '../components/CreateServiceOrderForm/CreateServiceOrderForm'
 import CreateRegisterMessageForm from '../components/CreateRegisterForms/CreateRegisterMessageForm'
 import CreateRegisterProcessSubprocessForm from '../components/CreateRegisterForms/CreateRegisterProcessSubprocessForm'
+import ListRegisterView from '../components/ListRegisterView/ListRegisterView'
 import Paper from '@material-ui/core/Paper';
 
 import {
@@ -228,6 +229,12 @@ export default function Home() {
                 <ListItemText primary={"Alterar Processo/Subprocesso"} />
               </ListItem>
             </NavLink>            
+            <NavLink  to={"/ordem-de-servico/registro"} style={{ textDecoration: 'none', color: "inherit" }}>
+              <ListItem button>
+                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
+                <ListItemText primary={"Listar registros"} />
+              </ListItem>
+            </NavLink>
           </List>
           <Divider />
           <List>
@@ -256,6 +263,7 @@ export default function Home() {
             <Route exact path="/cadastro-de-ordem-de-servico" component={CreateServiceOrderForm}/>
             <Route exact path="/adicionar-registro/mensagem" component={CreateRegisterMessageForm}/>
             <Route exact path="/adicionar-registro/alterar-processo-subprocesso" component={CreateRegisterProcessSubprocessForm}/>
+            <Route exact path="/ordem-de-servico/registro" component={ListRegisterView}/>
             <Route exact path="/*" component={NotFound}/>
           </Switch>
         </Paper>
