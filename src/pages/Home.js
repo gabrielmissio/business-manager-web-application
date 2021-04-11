@@ -34,6 +34,7 @@ import CreateRegisterMessageForm from '../components/CreateRegisterForms/CreateR
 import CreateRegisterProcessSubprocessForm from '../components/CreateRegisterForms/CreateRegisterProcessSubprocessForm'
 import ListRegisterView from '../components/ListRegisterView/ListRegisterView'
 import Paper from '@material-ui/core/Paper';
+import ManagerServiceOrder from './../components/ManagerServiceOrder/ManagerServiceOrder'
 
 import {
   BrowserRouter as Router,
@@ -235,15 +236,12 @@ export default function Home() {
                 <ListItemText primary={"Listar registros"} />
               </ListItem>
             </NavLink>
-          </List>
-          <Divider />
-          <List>
-            {['-----', '-----', '-----'].map((text, index) => (
-              <ListItem button key={text}>
+            <NavLink  to={"/ordem-de-servico/gerenciar"} style={{ textDecoration: 'none', color: "inherit" }}>
+              <ListItem button>
                 <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={"Gerenciar O.S."} />
               </ListItem>
-            ))}
+            </NavLink>
           </List>
         </Drawer>
         <main 
@@ -253,7 +251,6 @@ export default function Home() {
         > 
         <div className={classes.drawerHeader} />
         <Paper style={{ padding: 26, minHeight: '80.8vh'}} elevation={3} >
-
           <Switch>
             <Route exact path="/" component={WorkflowDashboard}/>
             <Route exact path="/cadastro-de-cliente" component={CreateClientForm}/>
@@ -263,7 +260,8 @@ export default function Home() {
             <Route exact path="/cadastro-de-ordem-de-servico" component={CreateServiceOrderForm}/>
             <Route exact path="/adicionar-registro/mensagem" component={CreateRegisterMessageForm}/>
             <Route exact path="/adicionar-registro/alterar-processo-subprocesso" component={CreateRegisterProcessSubprocessForm}/>
-            <Route exact path="/ordem-de-servico/registro" component={ListRegisterView}/>
+            <Route exact path="/ordem-de-servico/gerenciar" component={ManagerServiceOrder}/>
+            <Route exact path="/ordem-de-servico/registro" component={ListRegisterView}/> 
             <Route exact path="/*" component={NotFound}/>
           </Switch>
         </Paper>
