@@ -11,7 +11,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import MaterialTable, { MTableBodyRow } from "material-table";
+import Modal from "react-modal";
+import ListRegisterView from './../ListRegisterView/ListRegisterView'
+import { Button } from '@material-ui/core';
 
+Modal.setAppElement("#root");
 
 const columns = [
   { id: 'id', label: 'Id', minWidth: 50 },
@@ -40,8 +44,8 @@ const columns = [
   },
 ];
 
-
 class TableRegister extends React.Component {
+  
   constructor () {
       super();
 
@@ -53,7 +57,9 @@ class TableRegister extends React.Component {
 
           }],
           page: 0,
-          rowsPerPage: 10
+          rowsPerPage: 10,
+          modalIsOpen: false,
+          serviceOrderId: 0
       };
       
   }
@@ -74,6 +80,7 @@ class TableRegister extends React.Component {
 
   render () {
       const { tableData } = this.state;
+      const { teste } = this.state;
       const handleChangeRowsPerPage = (event) => {
         this.setState({ rowsPerPage: +event.target.value },() => this.setState({ page: 0 }, () => this.componentDidMount ()));
       };
@@ -82,50 +89,65 @@ class TableRegister extends React.Component {
         console.log(newPage)
       };
       return (
-      <MaterialTable
-      columns={[
-        { field: 'id', title: 'Id', minWidth: 50 },
-        { field: 'client.name', title: 'Cliente', minWidth: 100 },
-        { field: 'current_process.name', title: 'Processo', minWidth: 50 },
-        {
-          field: 'current_subprocess.name',
-          title: 'Subprocesso',
-          minWidth: 50,
-          align: 'right',
-          format: (value) => value.toLocaleString('en-US'),
-        },
-        {
-          field: 'opening_date',
-          title: 'Abertura',
-          minWidth: 100,
-          align: 'right',
-          format: (value) => value.toLocaleString('en-US'),
-        },
-        {
-          field: 'opening_date',
-          title: 'Prazo',
-          minWidth: 100,
-          align: 'right',
-          format: (value) => value.toFixed(2),
-        },
-      ]}
-      components={{
-        Row: props => (
-          <MTableBodyRow
-            {...props}
-            onDoubleClick={e => {
-              console.log(props.actions);
-              console.log(props.data.name)
-              alert("Make row editable" + props.data.id);
-            }
-          }
-          />
-        )
-      }}
+        <div id="oteste">
+        <MaterialTable
+          columns={[
+            { field: 'id', title: 'Id', minWidth: 50 },
+            { field: 'client.name', title: 'Cliente', minWidth: 100 },
+            { field: 'current_process.name', title: 'Processo', minWidth: 50 },
+            {
+              field: 'current_subprocess.name',
+              title: 'Subprocesso',
+              minWidth: 50,
+              align: 'right',
+              format: (value) => value.toLocaleString('en-US'),
+            },
+            {
+              field: 'opening_date',
+              title: 'Abertura',
+              minWidth: 100,
+              align: 'right',
+              format: (value) => value.toLocaleString('en-US'),
+            },
+            {
+              field: 'opening_date',
+              title: 'Prazo',
+              minWidth: 100,
+              align: 'right',
+              format: (value) => value.toFixed(2),
+            },
+          ]}
+          components={{
+            Row: props => (
+              <MTableBodyRow
+                {...props}
+                onDoubleClick={e => {
+                  console.log(props.actions);
+                  console.log(props.data.name)
+                  alert("Make row editable" + props.data.id);
+                  this.setState({serviceOrderId: props.data.id});
+                  this.setState({modalIsOpen: true});
+                }
+              }
+              />
+            )
+            
+          }}
 
-      data={tableData}
-      title="O.S. Abertas"
-    />
+          data={tableData}
+          title="O.S. Abertas"
+      
+        />
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          contentLabel="My dialog"
+          >
+          <div>My modal dialog.</div>
+          <Button onClick={()=>{this.setState({modalIsOpen: false})}}>fechar</Button>
+          <ListRegisterView serviceOrderId={this.state.serviceOrderId}/>
+      </Modal>
+        </div>
+    
       );
   }
 };

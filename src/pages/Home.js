@@ -35,6 +35,7 @@ import CreateRegisterProcessSubprocessForm from '../components/CreateRegisterFor
 import ListRegisterView from '../components/ListRegisterView/ListRegisterView'
 import Paper from '@material-ui/core/Paper';
 import ManagerServiceOrder from './../components/ManagerServiceOrder/ManagerServiceOrder'
+import ServiceOrderModal from './../components/ManagerServiceOrder/components/ServiceOrderModal'
 
 import {
   BrowserRouter as Router,
@@ -115,7 +116,7 @@ export default function Home() {
 
   return (
     <Router>
-      <div className={classes.root}>
+      <div className={classes.root} >
       <CssBaseline />
         <AppBar
           position="fixed"
@@ -244,7 +245,7 @@ export default function Home() {
             </NavLink>
           </List>
         </Drawer>
-        <main 
+        <main
           className={clsx(classes.content, {
             [classes.contentShift]: open,
           })}

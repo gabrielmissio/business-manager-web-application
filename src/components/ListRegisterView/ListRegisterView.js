@@ -13,7 +13,7 @@ class ListRegisterView extends Component {
     };
 
     componentDidMount() {
-        fetch('https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/service-order/6/register')
+        fetch('https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/service-order/'+this.props.serviceOrderId+'/register')
             .then(res => res.json())
             .then((data) => {
                 this.setState({ registers: data })

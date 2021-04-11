@@ -19,12 +19,12 @@ function CreateRegisterMessageForm() {
     alert('os dados: subprocess_id, process_id, user_id, service_order_id estao mokados')
 
     var message = event.target.message.value
-    var subprocess_id = 10
+    var subprocess_id = 2
     var process_id = 5
     var title = 'Adicionado comentario'
     var is_changed = false
     var user_id = 1
-    var service_order_id = 7
+    var service_order_id = 10
 
     event.preventDefault();
 
@@ -32,7 +32,7 @@ function CreateRegisterMessageForm() {
     var data = JSON.stringify({"is_changed": is_changed, "user_id": user_id, "process_id": process_id, "subprocess_id": subprocess_id, "service_order_id": service_order_id, "title": title, "message": message});
     var config = {
       method: 'post',
-      url: 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process',
+      url: 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/register',
       headers: { 
         'Authorization': 'Bearer', 
         'Content-Type': 'application/json'
@@ -40,6 +40,7 @@ function CreateRegisterMessageForm() {
       data : data
     };
     alert(data)
+    console.log(data)
     axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
