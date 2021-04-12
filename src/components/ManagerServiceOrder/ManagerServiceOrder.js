@@ -132,7 +132,6 @@ class TableRegister extends React.Component {
                 onDoubleClick={e => {
                   console.log(props.actions);
                   console.log(props.data.name)
-                  alert("Make row editable" + props.data);
                   this.setState({serviceOrderId: props.data.id});
                   this.setState({modalIsOpen: true});
                 }
