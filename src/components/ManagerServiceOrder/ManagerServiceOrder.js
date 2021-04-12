@@ -14,6 +14,13 @@ import MaterialTable, { MTableBodyRow } from "material-table";
 import Modal from "react-modal";
 import ListRegisterView from './../ListRegisterView/ListRegisterView'
 import { Button } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import Typography from '@material-ui/core/Typography';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import Container from '@material-ui/core/Container';
+import ServiceOrderModal from './components/ServiceOrderModal'
 
 Modal.setAppElement("#root");
 
@@ -88,6 +95,7 @@ class TableRegister extends React.Component {
         this.setState({ page: newPage+1 },() => this.componentDidMount ());
         console.log(newPage)
       };
+
       return (
         <div id="oteste">
         <MaterialTable
@@ -124,7 +132,7 @@ class TableRegister extends React.Component {
                 onDoubleClick={e => {
                   console.log(props.actions);
                   console.log(props.data.name)
-                  alert("Make row editable" + props.data.id);
+                  alert("Make row editable" + props.data);
                   this.setState({serviceOrderId: props.data.id});
                   this.setState({modalIsOpen: true});
                 }
@@ -138,8 +146,21 @@ class TableRegister extends React.Component {
           title="O.S. Abertas"
       
         />
+        <Dialog  fullWidth={true} maxWidth={'md'} aria-labelledby="max-width-dialog-title" open={this.state.modalIsOpen}>
+          <DialogTitle id="customized-dialog-title">
+            Modal title
+          </DialogTitle>
+          <DialogContent dividers>
+            <ServiceOrderModal serviceOrderId={this.state.serviceOrderId}/>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={()=>{this.setState({modalIsOpen: false})}} autoFocus color="primary">
+              fechar
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Modal
-          isOpen={this.state.modalIsOpen}
+          isOpen={false}
           contentLabel="My dialog"
           >
           <div>My modal dialog.</div>
