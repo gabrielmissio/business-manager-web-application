@@ -6,49 +6,81 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import AsyncSelect from 'react-select/async';
+import Select from 'react-select';
 import axios from 'axios';
 
 var valueClient = -1
 var valueProcess = -1
 var valueSubprocess = -1
 
-async function loadOptionsProcess(){
-  //get subprocess
-  var axios = require('axios');
-  const res = await axios.get('https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process')
-  const data = res.data
-
-  const options = data.process.map(d => ({
-      "value" : d.id,
-      "label" : d.name
-  }))
-  return options
-}
-
 
 class CreateRegisterProcessSubprocessForm extends React.Component {
 
   state = {
-    service_order: []
+    service_order: [],
+    process: [],
+    subpross: [],
+    selectedProcessId: -1,
+    selectedProcessName: 'Carregando processo atual',
+    selectedSubprocessId: -1,
+    selectedSubprocessName: 'Carregando subprocesso atual',
+
   };
 
   componentDidMount () {
+    //load current service order informations
     var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/service-order/'+this.props.serviceOrderId
     axios.get(url, {
         responseType: 'json'
     }).then(response => {
         var data = response.data
         console.log(response.data)
-        this.setState({ service_order: data});
+        this.setState({ service_order: data}, () => set_current_process_subprocess(), loadProcessOptions());
     });
+    const loadProcessOptions = () => {
+      var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process'
+      axios.get(url, {
+          responseType: 'json'
+      }).then(response => {
+          var data = response.data
+          const options = data.process.map(d => ({
+            "value" : d.id,
+            "label" : d.name
+          }))
+          this.setState({ process: options}, () => loadSubprocessOptions());
+      });
+    }
+    const loadSubprocessOptions = () => {
+      var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process/'+this.state.service_order.current_process.id
+      axios.get(url, {
+          responseType: 'json'
+      }).then(response => {
+          var data = response.data
+          const options = data.subprocess.map(d => ({
+            "value" : d.id,
+            "label" : d.name
+          }))
+          this.setState({ subprocess: options});
+      });
+    }
+    //load all process
+    
+    const set_current_process_subprocess = () => {
+      this.setState({ selectedProcessId: this.state.service_order.current_process.id, selectedProcessName: this.state.service_order.current_process.name});
+      this.setState({ selectedSubprocessId: this.state.service_order.current_subprocess.id, selectedSubprocessName: this.state.service_order.current_subprocess.name});
+    }
+
   }
 
 
   render() {
+
     const handleChangeComboProcess = (e) => {
-      var a = {value:e}
-      var b = a.value
-      valueProcess = b
+      this.setState({ selectedProcessId: e.value, selectedProcessName: e.label});
+    }
+
+    const handleChangeComboSubprocess = (e) => {
+      this.setState({ selectedSubprocessId: e.value, selectedSubprocessName: e.label});
     }
 
     const handleSubmit = event => {
@@ -56,20 +88,15 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
       alert('os dados: subprocess_id, process_id, user_id, service_order_id estao mokados')
   
       var message = event.target.message.value
-      var subprocess_id = 10
-      var process_id = 5
-      var title = 'Adicionado comentario'
-      var is_changed = false
       var user_id = 1
-      var service_order_id = 7
   
       event.preventDefault();
   
       var axios = require('axios');
-      var data = JSON.stringify({"is_changed": is_changed, "user_id": user_id, "process_id": process_id, "subprocess_id": subprocess_id, "service_order_id": service_order_id, "title": title, "message": message});
+      var data = JSON.stringify({"is_changed": true, "user_id": user_id, "process_id": this.state.selectedProcessId, "subprocess_id": this.state.selectedSubprocessId, "service_order_id": this.props.serviceOrderId, "title": this.props.messageTitle, "message": message});
       var config = {
         method: 'post',
-        url: 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process',
+        url: 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/register',
         headers: { 
           'Authorization': 'Bearer', 
           'Content-Type': 'application/json'
@@ -102,7 +129,11 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
               <br/>
               <Grid container spacing={4}>
                 <Grid item xs={12} sm={12}>
-                  <AsyncSelect cacheOptions defaultOptions loadOptions={loadOptionsProcess} onChange={handleChangeComboProcess}/>
+                  <Select
+                    value={{ label: this.state.selectedProcessName, value: this.state.selectedProcessId }}
+                    onChange={handleChangeComboProcess}
+                    options={this.state.process}                  
+                  />
                 </Grid>
               </Grid>
               <br/>
@@ -116,7 +147,11 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
               <br/>
               <Grid container spacing={4}>
                 <Grid item xs={12} sm={12}>
-                  <AsyncSelect cacheOptions defaultOptions/>                              
+                  <Select
+                    value={{ label: this.state.selectedSubprocessName, value: this.state.selectedSubprocessId }}
+                    onChange={handleChangeComboSubprocess}
+                    options={this.state.subprocess}                  
+                  />                             
                 </Grid>
               </Grid>
               <br/>
