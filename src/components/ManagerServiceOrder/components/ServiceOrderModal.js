@@ -26,7 +26,7 @@ class ServiceOrderModal extends Component {
   }
   render() {
       return (
-        <div>
+        <div style={{ maxHeight: 360}}>
           <Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={6}>
             <Grid item xs={12} sm={8}>
               <ListRegisterView serviceOrderId={this.props.serviceOrderId}/>
@@ -51,7 +51,7 @@ class ServiceOrderModal extends Component {
                             </Button>
                           </Grid>
                           <Grid item xs={12} sm={12}>
-                            <Button disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
+                            <Button onClick={()=>{this.setState({modalFinalizeServiceOrder: true})}} disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
                               Encerrar O.S.
                             </Button>
                           </Grid>
@@ -67,13 +67,26 @@ class ServiceOrderModal extends Component {
           </Grid>
           <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalRegisterMessage}>
             <DialogTitle id="customized-dialog-title">
-              Modal title
+              Adicionar Registro
             </DialogTitle>
             <DialogContent dividers>
-              <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId}/>
+              <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId} messageTitle='Adicionado comentario'/>
             </DialogContent>
             <DialogActions>
               <Button onClick={()=>{this.setState({modalRegisterMessage: false})}} autoFocus color="primary">
+                fechar
+              </Button>
+            </DialogActions>
+          </Dialog>
+          <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalFinalizeServiceOrder}>
+            <DialogTitle id="customized-dialog-title">
+              Encerrar O.S. | {this.props.serviceOrderId}
+            </DialogTitle>
+            <DialogContent dividers>
+              <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId} messageTitle='Adicionado comentario | teste finalizar O.S.'/>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={()=>{this.setState({modalFinalizeServiceOrder: false})}} autoFocus color="primary">
                 fechar
               </Button>
             </DialogActions>

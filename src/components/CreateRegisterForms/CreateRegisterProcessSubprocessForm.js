@@ -8,7 +8,34 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import AsyncSelect from 'react-select/async';
 
+
+var valueClient = -1
+var valueProcess = -1
+var valueSubprocess = -1
+
+async function loadOptionsProcess(){
+  //get subprocess
+  var axios = require('axios');
+  const res = await axios.get('https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process')
+  const data = res.data
+
+  const options = data.process.map(d => ({
+      "value" : d.id,
+      "label" : d.name
+  }))
+  return options
+}
+
+
+
+
 function CreateRegisterProcessSubprocessForm() {
+
+  const handleChangeComboProcess = (e) => {
+    var a = {value:e}
+    var b = a.value
+    valueProcess = b
+  }
 
   const handleSubmit = event => {
     
@@ -71,7 +98,7 @@ function CreateRegisterProcessSubprocessForm() {
             <br/>
             <Grid container spacing={4}>
               <Grid item xs={12} sm={12}>
-                <AsyncSelect cacheOptions defaultOptions/>                              
+                <AsyncSelect cacheOptions defaultOptions loadOptions={loadOptionsProcess} onChange={handleChangeComboProcess}/>
               </Grid>
             </Grid>
             <br/>

@@ -38,7 +38,7 @@ class CreateRegisterMessageForm extends React.Component {
     event.preventDefault();
 
     var axios = require('axios');
-    var data = JSON.stringify({"is_changed": is_changed, "user_id": user_id, "process_id": this.state.service_order.current_process.id, "subprocess_id": this.state.service_order.current_subprocess.id, "service_order_id": this.state.service_order.id, "title": title, "message": message});
+    var data = JSON.stringify({"is_changed": is_changed, "user_id": user_id, "process_id": this.state.service_order.current_process.id, "subprocess_id": this.state.service_order.current_subprocess.id, "service_order_id": this.state.service_order.id, "title": this.props.messageTitle, "message": message});
 
     var config = {
       method: 'post',
@@ -65,15 +65,6 @@ class CreateRegisterMessageForm extends React.Component {
     <Container maxWidth="sm">
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" justify="space-between" alignItems="flex-start">
-          <Grid  container item xs={12} alignItems="flex-start" justify="center">
-            <Typography color="primary" variant="h6" align="center" component="h2"  alignItems="center" justify="center">
-              <Box fontWeight="fontWeightBold">
-              ADICIONAR REGISTRO
-              </Box>
-            </Typography>            
-          </Grid>
-          <br/>
-          <br/>
           <Grid container xs={12}>
             <Typography color="primary" variant="h6" component="h2" >
                 Comentario
