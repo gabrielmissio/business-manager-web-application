@@ -9,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import CreateRegisterMessageForm from './../../CreateRegisterForms/CreateRegisterMessageForm'
+import CreateRegisterProcessSubprocessForm from './../../CreateRegisterForms/CreateRegisterProcessSubprocessForm'
 
 
 class ServiceOrderModal extends Component {
@@ -46,7 +47,7 @@ class ServiceOrderModal extends Component {
                             </Button>
                           </Grid>
                           <Grid item xs={12} sm={12}>
-                            <Button disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
+                            <Button onClick={()=>{this.setState({modalRegisterFlowChange: true})}} disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
                               Alterar processo/subprocesso
                             </Button>
                           </Grid>
@@ -65,6 +66,7 @@ class ServiceOrderModal extends Component {
             </Grid>
             
           </Grid>
+
           <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalRegisterMessage}>
             <DialogTitle id="customized-dialog-title">
               Adicionar Registro
@@ -78,6 +80,21 @@ class ServiceOrderModal extends Component {
               </Button>
             </DialogActions>
           </Dialog>
+
+          <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalRegisterFlowChange}>
+            <DialogTitle id="customized-dialog-title">
+              Adicionar Registro
+            </DialogTitle>
+            <DialogContent dividers>
+              <CreateRegisterProcessSubprocessForm serviceOrderId={this.props.serviceOrderId} messageTitle='Alterado Processo/Subprocesso'/>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={()=>{this.setState({modalRegisterFlowChange: false})}} autoFocus color="primary">
+                fechar
+              </Button>
+            </DialogActions>
+          </Dialog>
+
           <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalFinalizeServiceOrder}>
             <DialogTitle id="customized-dialog-title">
               Encerrar O.S. | {this.props.serviceOrderId}
@@ -91,6 +108,7 @@ class ServiceOrderModal extends Component {
               </Button>
             </DialogActions>
           </Dialog>
+
         </div>
       )
   } 
