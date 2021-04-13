@@ -10,7 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import CreateRegisterMessageForm from './../../CreateRegisterForms/CreateRegisterMessageForm'
 import CreateRegisterProcessSubprocessForm from './../../CreateRegisterForms/CreateRegisterProcessSubprocessForm'
-
+import ClientView from './../../EntityView/Client/ClientView'
 
 class ServiceOrderModal extends Component {
 

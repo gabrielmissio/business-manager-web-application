@@ -5,14 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
-import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
 import axios from 'axios';
-
-var valueClient = -1
-var valueProcess = -1
-var valueSubprocess = -1
-
 
 class CreateRegisterProcessSubprocessForm extends React.Component {
 
@@ -76,18 +70,29 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
   render() {
 
     const handleChangeComboProcess = (e) => {
-      this.setState({ selectedProcessId: e.value, selectedProcessName: e.label});
+      this.setState({ selectedProcessId: e.value, selectedProcessName: e.label}, () => loadSubprocessOptions(),  this.setState({ selectedSubprocessId: -1, selectedSubprocessName: ''}));
     }
 
     const handleChangeComboSubprocess = (e) => {
       this.setState({ selectedSubprocessId: e.value, selectedSubprocessName: e.label});
     }
 
-    const handleSubmit = event => {
-    
-      alert('os dados: subprocess_id, process_id, user_id, service_order_id estao mokados')
-  
-      var message = event.target.message.value
+    const loadSubprocessOptions = () => {
+      var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process/'+this.state.selectedProcessId
+      axios.get(url, {
+          responseType: 'json'
+      }).then(response => {
+          var data = response.data
+          const options = data.subprocess.map(d => ({
+            "value" : d.id,
+            "label" : d.name
+          }))
+          this.setState({ subprocess: options});
+      });
+    }
+
+    const handleSubmit = event => {  
+      var message = 'Iniciado subprocesso ' + this.state.selectedSubprocessName + ' no processo ' + this.state.selectedProcessName + '\n\n\n <br/>' + event.target.message.value
       var user_id = 1
   
       event.preventDefault();
