@@ -8,8 +8,6 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import AsyncSelect from 'react-select/async';
 
-var valueTeste = []
-
 async function getOptions(){
   var axios = require('axios');
   const res = await axios.get('https://lzsxdvovw7.execute-api.us-east-1.amazonaws.com/dev/subprocess')
@@ -25,10 +23,9 @@ async function getOptions(){
 function CreateUserForm() {
 
   const handleChangeCombo = (e) => {
-    var a = {value:e}
-    var b = a.value
-    //alert(b)
-    valueTeste = b
+    //var a = {value:e}
+    //var b = a.value
+    //valueTeste = b
   }
 
   const handleSubmit = event => {

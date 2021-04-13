@@ -3,10 +3,8 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import AsyncSelect from 'react-select/async';
 
 // const loadOptions = () => {

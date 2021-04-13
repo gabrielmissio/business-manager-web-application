@@ -35,7 +35,6 @@ import CreateRegisterProcessSubprocessForm from '../components/CreateRegisterFor
 import ListRegisterView from '../components/ListRegisterView/ListRegisterView'
 import Paper from '@material-ui/core/Paper';
 import ManagerServiceOrder from './../components/ManagerServiceOrder/ManagerServiceOrder'
-import ServiceOrderModal from './../components/ManagerServiceOrder/components/ServiceOrderModal'
 
 import {
   BrowserRouter as Router,
@@ -219,24 +218,6 @@ export default function Home() {
                 <ListItemText primary={"Cadastrar O.S."} />
               </ListItem>
             </NavLink>         
-            <NavLink  to={"/adicionar-registro/mensagem"} style={{ textDecoration: 'none', color: "inherit" }}>
-              <ListItem button>
-                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
-                <ListItemText primary={"Adicionar Mensagem"} />
-              </ListItem>
-            </NavLink>
-            <NavLink  to={"/adicionar-registro/alterar-processo-subprocesso"} style={{ textDecoration: 'none', color: "inherit" }}>
-              <ListItem button>
-                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
-                <ListItemText primary={"Alterar Processo/Subprocesso"} />
-              </ListItem>
-            </NavLink>            
-            <NavLink  to={"/ordem-de-servico/registro"} style={{ textDecoration: 'none', color: "inherit" }}>
-              <ListItem button>
-                <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>
-                <ListItemText primary={"Listar registros"} />
-              </ListItem>
-            </NavLink>
             <NavLink  to={"/ordem-de-servico/gerenciar"} style={{ textDecoration: 'none', color: "inherit" }}>
               <ListItem button>
                 <ListItemIcon>{<LabelImportantIcon />}</ListItemIcon>

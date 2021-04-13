@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Container from '@material-ui/core/Container';
 import Dialog from '@material-ui/core/Dialog';
-import Typography from '@material-ui/core/Typography';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -71,7 +70,7 @@ class ServiceOrderModal extends Component {
               Modal title
             </DialogTitle>
             <DialogContent dividers>
-              <CreateRegisterMessageForm/>
+              <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId}/>
             </DialogContent>
             <DialogActions>
               <Button onClick={()=>{this.setState({modalRegisterMessage: false})}} autoFocus color="primary">

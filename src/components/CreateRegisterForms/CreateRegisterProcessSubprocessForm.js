@@ -7,10 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import AsyncSelect from 'react-select/async';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-
-var valueTeste = []
-
 
 function CreateRegisterProcessSubprocessForm() {
 
@@ -55,9 +51,9 @@ function CreateRegisterProcessSubprocessForm() {
   return(
     <Container maxWidth="sm">
         <form onSubmit={handleSubmit}>
-          <Grid container direction="column" justify="space-between" alignItems="flex-start">
-            <Grid  container item xs={12} alignItems="flex-start" justify="center">
-              <Typography color="primary" variant="h6" align="center" component="h2"  alignItems="center" justify="center">
+          <Grid container direction="column" justify="space-between" alignitems="flex-start">
+            <Grid  container item xs={12} alignitems="flex-start" justify="center">
+              <Typography color="primary" variant="h6" align="center" component="h2"  alignitems="center" justify="center">
                 <Box fontWeight="fontWeightBold">
                 ADICIONAR REGISTRO
                 </Box>
