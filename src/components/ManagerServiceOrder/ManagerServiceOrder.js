@@ -13,7 +13,6 @@ import ServiceOrderModal from './components/ServiceOrderModal'
 import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 
-
 //Modal.setAppElement("#root");
 
 class TableRegister extends React.Component {
@@ -52,17 +51,17 @@ class TableRegister extends React.Component {
   }
 
   render () {
-      const { tableData } = this.state;
-      const handleChangeRowsPerPage = (event) => {
-        this.setState({ rowsPerPage: +event.target.value },() => this.setState({ page: 0 }, () => this.componentDidMount ()));
-      };
-      const handleChangePage = (event, newPage) => {
-        this.setState({ page: newPage+1 },() => this.componentDidMount ());
-        console.log(newPage)
-      };
+    const { tableData } = this.state;
+    const handleChangeRowsPerPage = (event) => {
+      this.setState({ rowsPerPage: +event.target.value },() => this.setState({ page: 0 }, () => this.componentDidMount ()));
+    };
+    const handleChangePage = (event, newPage) => {
+      this.setState({ page: newPage+1 },() => this.componentDidMount ());
+      console.log(newPage)
+    };
 
-      return (
-        <div id="oteste">
+    return (
+      <div id="oteste">
         <TableContainer style={{ maxHeight: 440}}>
           <MaterialTable
             columns={[
@@ -144,10 +143,9 @@ class TableRegister extends React.Component {
           <div>My modal dialog.</div>
           <Button onClick={()=>{this.setState({modalIsOpen: false})}}>fechar</Button>
           <ListRegisterView serviceOrderId={this.state.serviceOrderId}/>
-      </Modal>
-        </div>
-    
-      );
+        </Modal>
+      </div>
+    );
   }
 };
 

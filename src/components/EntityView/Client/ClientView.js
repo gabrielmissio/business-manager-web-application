@@ -9,15 +9,36 @@ import SendIcon from '@material-ui/icons/Send';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import axios from 'axios';
 
 class ClientView extends React.Component {
 
     state = {
-        client: []
+        client: [],
+        address: [],
+        phones: [],
+        service_order: []
     };
 
     componentDidMount() {
-        
+        var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/service-order/'+this.props.serviceOrderId
+        axios.get(url, {
+            responseType: 'json'
+        }).then(response => {
+            var data = response.data
+            console.log(response.data)
+            this.setState({ service_order: data}, () => loadClientInformation());
+        });
+        const loadClientInformation = () => {
+        var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client/'+this.state.service_order.client.id
+        axios.get(url, {
+            responseType: 'json'
+        }).then(response => {
+            var data = response.data
+            console.log(response.data)            
+            this.setState({ client: data});
+        });
+        }
         
     }
 
@@ -34,17 +55,17 @@ class ClientView extends React.Component {
                     <br/>
                     <Grid container spacing={4}>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="name" label="Name"/>
+                            <TextField size="small" fullWidth variant="outlined"  name="name" label="Name" value={this.state.client.name} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="document" label="Documento"/>
+                            <TextField size="small" fullWidth variant="outlined"  name="document" label="Documento" value={this.state.client.document} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento"/>
+                            <TextField size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento" value={this.state.client.birthdate} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Grid container item xs={12} >
-                                <RadioGroup row aria-label="gender" name="gender1" value={'NP'} >
+                                <RadioGroup row aria-label="gender" name="gender1" value={this.state.client.type} defaultValue={'NP'} >
                                     <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />
                                     <FormControlLabel value="LP" control={<Radio color="primary"/>} label="PJ" />
                                 </RadioGroup>       
@@ -100,22 +121,7 @@ class ClientView extends React.Component {
                         <Grid item xs={12} sm={6}>
                             <TextField size="small" variant="outlined" fullWidth name="phone2" label="Telefone 2"/>
                         </Grid>
-                    </Grid>
-                    <br/>
-                    <Grid container xs={12} sm={12}>
-                        <Button
-                        type="submit"
-                        disableElevation
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        endIcon={<SendIcon/>}
-                        >
-                        Cadastrar
-                    </Button>
-
-                    </Grid>
-                    
+                    </Grid> 
                 </Grid>
             </Container>
         )

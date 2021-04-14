@@ -11,6 +11,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import CreateRegisterMessageForm from './../../CreateRegisterForms/CreateRegisterMessageForm'
 import CreateRegisterProcessSubprocessForm from './../../CreateRegisterForms/CreateRegisterProcessSubprocessForm'
 import ClientView from './../../EntityView/Client/ClientView'
+import CloseServiceOrder from './../../CreateRegisterForms/CloseServiceOrder'
 
 class ServiceOrderModal extends Component {
 
@@ -36,8 +37,8 @@ class ServiceOrderModal extends Component {
                 <Container maxWidth="sm">
                     <Grid container direction="column" justify="space-between" alignItems="flex-start">
                       <Grid container spacing={4}>
-                          <Grid item xs={12} sm={12}>
-                            <Button disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
+                          <Grid item xs={12} sm={12}> 
+                            <Button onClick={()=>{this.setState({modalClientInfo: true})}} disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
                               Informações do cliente
                             </Button>
                           </Grid>
@@ -66,6 +67,20 @@ class ServiceOrderModal extends Component {
             </Grid>
             
           </Grid>
+          
+          <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalClientInfo}>
+            <DialogTitle id="customized-dialog-title">
+              Informações do cliente
+            </DialogTitle>
+            <DialogContent dividers>
+              <ClientView serviceOrderId={this.props.serviceOrderId}/>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={()=>{this.setState({modalClientInfo: false})}} autoFocus color="primary">
+                fechar
+              </Button>
+            </DialogActions>
+          </Dialog>
 
           <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalRegisterMessage}>
             <DialogTitle id="customized-dialog-title">
@@ -100,7 +115,7 @@ class ServiceOrderModal extends Component {
               Encerrar O.S. | {this.props.serviceOrderId}
             </DialogTitle>
             <DialogContent dividers>
-              <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId} messageTitle='Adicionado comentario | teste finalizar O.S.'/>
+              <CloseServiceOrder serviceOrderId={this.props.serviceOrderId} messageTitle='Adicionado comentario | teste finalizar O.S.'/>
             </DialogContent>
             <DialogActions>
               <Button onClick={()=>{this.setState({modalFinalizeServiceOrder: false})}} autoFocus color="primary">
