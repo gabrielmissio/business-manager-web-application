@@ -112,7 +112,7 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
       axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
-        alert('Processo cadastrado com sucesso!')
+        alert('Registro adicionado com sucesso!')
       })
       .catch(function (error) {
         console.log(error);

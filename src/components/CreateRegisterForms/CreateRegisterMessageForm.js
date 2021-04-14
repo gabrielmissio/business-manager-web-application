@@ -37,7 +37,7 @@ class CreateRegisterMessageForm extends React.Component {
     event.preventDefault();
 
     var axios = require('axios');
-    var data = JSON.stringify({"is_changed": is_changed, "user_id": user_id, "process_id": this.state.service_order.current_process.id, "subprocess_id": this.state.service_order.current_subprocess.id, "service_order_id": this.state.service_order.id, "title": this.props.messageTitle, "message": message});
+    var data = JSON.stringify({"is_open": this.props.keepOpenServiceOrder, "is_changed": this.props.is_changed, "user_id": user_id, "process_id": this.state.service_order.current_process.id, "subprocess_id": this.state.service_order.current_subprocess.id, "service_order_id": this.state.service_order.id, "title": this.props.messageTitle, "message": message});
 
     var config = {
       method: 'post',
@@ -48,15 +48,15 @@ class CreateRegisterMessageForm extends React.Component {
       },
       data : data
     };
-    
+    alert(data)
     axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
-      alert('Mensagem adicionada com sucesso!')
+      alert('Registro adicionado com sucesso!')
     })
     .catch(function (error) {
       console.log(error);
-      alert('Erro ao adicionar mensagem!')
+      alert('Erro ao adicionar registro!')
     });
     
   }    

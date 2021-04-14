@@ -16,7 +16,8 @@ class ClientView extends React.Component {
     state = {
         client: [],
         address: [],
-        phones: [],
+        phones: {},
+        phone1: '-',
         service_order: []
     };
 
@@ -35,8 +36,11 @@ class ClientView extends React.Component {
             responseType: 'json'
         }).then(response => {
             var data = response.data
-            console.log(response.data)            
+            console.log(response.data)      
             this.setState({ client: data});
+            this.setState({ address: data.addresses[0]})
+            this.setState({ phones: data.phones}, () => this.setState({ phone1: this.state.phones[0].phone_number}))
+            // () => this.setState({ address: this.state.client.addresses[0]}), this.setState({ phones: this.state.client.phones[0]})
         });
         }
         
@@ -84,22 +88,22 @@ class ClientView extends React.Component {
                     <br/>
                     <Grid container spacing={4}>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="country" label="Pais"/>
+                            <TextField size="small" variant="outlined" fullWidth name="country" label="Pais" value={this.state.address.country} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="province" label="Estado"/>
+                            <TextField size="small" variant="outlined" fullWidth name="province" label="Estado" value={this.state.address.province} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="city" label="Cidade"/>
+                            <TextField size="small" variant="outlined" fullWidth name="city" label="Cidade" value={this.state.address.city} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="zip" label="CEP"/>
+                            <TextField size="small" variant="outlined" fullWidth name="zip" label="CEP" value={this.state.address.zip} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="street" label="Rua"/>
+                            <TextField size="small" variant="outlined" fullWidth name="street" label="Rua" value={this.state.address.street} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="address_number" label="Numero"/>
+                            <TextField size="small" variant="outlined" fullWidth name="address_number" label="Numero" value={this.state.address.address_number} defaultValue={'-'}/>
                         </Grid>
                     </Grid>
 
@@ -113,13 +117,13 @@ class ClientView extends React.Component {
                     <br/>
                     <Grid container spacing={4}>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="email" label="Email"/>
+                            <TextField size="small" variant="outlined" fullWidth name="email" label="Email" value={'example@mail.com'} defaultValue={'-'}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="phone1" label="Telefone 1"/>
+                            <TextField size="small" variant="outlined" fullWidth name="phone1" label="Telefone 1" value={this.state.phone1}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="phone2" label="Telefone 2"/>
+                            <TextField size="small" variant="outlined" fullWidth name="phone2" label="Telefone 2" value={this.state.phone1}/>
                         </Grid>
                     </Grid> 
                 </Grid>

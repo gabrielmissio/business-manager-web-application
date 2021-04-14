@@ -11,7 +11,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import CreateRegisterMessageForm from './../../CreateRegisterForms/CreateRegisterMessageForm'
 import CreateRegisterProcessSubprocessForm from './../../CreateRegisterForms/CreateRegisterProcessSubprocessForm'
 import ClientView from './../../EntityView/Client/ClientView'
-import CloseServiceOrder from './../../CreateRegisterForms/CloseServiceOrder'
 
 class ServiceOrderModal extends Component {
 
@@ -87,7 +86,7 @@ class ServiceOrderModal extends Component {
               Adicionar Registro
             </DialogTitle>
             <DialogContent dividers>
-              <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId} messageTitle='Adicionado comentario'/>
+              <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId} messageTitle='Adicionado comentario' keepOpenServiceOrder={true} is_changed={false}/>
             </DialogContent>
             <DialogActions>
               <Button onClick={()=>{this.setState({modalRegisterMessage: false})}} autoFocus color="primary">
@@ -115,7 +114,7 @@ class ServiceOrderModal extends Component {
               Encerrar O.S. | {this.props.serviceOrderId}
             </DialogTitle>
             <DialogContent dividers>
-              <CloseServiceOrder serviceOrderId={this.props.serviceOrderId} messageTitle='Adicionado comentario | teste finalizar O.S.'/>
+              <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId} messageTitle='Teste finalizar O.S.' keepOpenServiceOrder={false} is_changed={true}/>
             </DialogContent>
             <DialogActions>
               <Button onClick={()=>{this.setState({modalFinalizeServiceOrder: false})}} autoFocus color="primary">
