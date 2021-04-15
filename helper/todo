@@ -1,3 +1,4 @@
+-Show all number and address form a client (fix this issue using map and manipuleting the DOM)
 -add validation on all forms
 -change options on subpross options when change process select value
 -refactor project using adapter pattern and contexts
