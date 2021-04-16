@@ -18,17 +18,17 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import NotFound from './NotFound'; 
 import WorkflowDashboard from '../components/workflow/WorkflowDashboard'
-import CreateClientForm from '../components/CreateClientForm/CreateClientForm'
-import CreateSubprocessForm from '../components/CreateSubprocessForm/CreateSubprocessForm'
-import CreateProcessForm from '../components/CreateProcessForm/CreateProcessForm'
-import CreateUserForm from '../components/CreateUserForm/CreateUserForm'
-import CreateServiceOrderForm from '../components/CreateServiceOrderForm/CreateServiceOrderForm'
-import CreateRegisterMessageForm from '../components/CreateRegisterForms/CreateRegisterMessageForm'
-import CreateRegisterProcessSubprocessForm from '../components/CreateRegisterForms/CreateRegisterProcessSubprocessForm'
-import ListRegisterView from '../components/ListRegisterView/ListRegisterView'
+import CreateClientForm from '../components/client/CreateClientForm/CreateClientForm'
+import CreateSubprocessForm from '../components/subprocess/CreateSubprocessForm/CreateSubprocessForm'
+import CreateProcessForm from '../components/process/CreateProcessForm/CreateProcessForm'
+import CreateUserForm from '../components/user/CreateUserForm/CreateUserForm'
+import CreateServiceOrderForm from '../components/service_order/CreateServiceOrderForm/CreateServiceOrderForm'
+import CreateRegisterMessageForm from '../components/register/CreateRegisterForms/CreateRegisterMessageForm'
+import CreateRegisterProcessSubprocessForm from '../components/register/CreateRegisterForms/CreateRegisterProcessSubprocessForm'
+import ListRegisterView from '../components/register/ListRegisterView/ListRegisterView'
 import Paper from '@material-ui/core/Paper';
-import ManagerServiceOrder from './../components/ManagerServiceOrder/ManagerServiceOrder'
-import ItensDrawer from './../components/Home/ItensDrawer/ItensDrawer'
+import ManagerServiceOrder from '../components/service_order/ListServiceOrderView/ManagerServiceOrder'
+import ItensDrawer from '../components/home/ItensDrawer/ItensDrawer'
 
 import {
   BrowserRouter as Router,
@@ -212,7 +212,7 @@ export default function Home() {
             <Route exact path="/cliente/cadastrar" component={CreateClientForm}/>
             <Route exact path="/processo/cadastrar" component={CreateProcessForm}/>
             <Route exact path="/subprocesso/cadastrar" component={CreateSubprocessForm}/>
-            <Route exact path="/cadastro-de-ordem-de-servico" component={CreateServiceOrderForm}/>
+            <Route exact path="/ordem-de-servico/cadastrar" component={CreateServiceOrderForm}/>
             <Route exact path="/adicionar-registro/mensagem" component={CreateRegisterMessageForm}/>
             <Route exact path="/adicionar-registro/alterar-processo-subprocesso" component={CreateRegisterProcessSubprocessForm}/>
             <Route exact path="/ordem-de-servico/gerenciar" component={ManagerServiceOrder}/>

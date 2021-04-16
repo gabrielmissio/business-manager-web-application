@@ -112,7 +112,7 @@ function ItensDrawer() {
             </ListItem>
             <Collapse component="li" in={serviceOrderControl} timeout="auto" unmountOnExit>
                 <List disablePadding>
-                    <ListItemLink to="/cadastro-de-ordem-de-servico" className={classes.nested} label='Cadastrar' />
+                    <ListItemLink to="/ordem-de-servico/cadastrar" className={classes.nested} label='Cadastrar' />
                     <ListItemLink to="/ordem-de-servico/gerenciar" className={classes.nested} label='Geranciar' />
                 </List>
             </Collapse>

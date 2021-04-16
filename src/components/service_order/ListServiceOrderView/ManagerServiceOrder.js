@@ -3,7 +3,7 @@ import axios from 'axios';
 import ReactDOM from 'react-dom';
 import MaterialTable, { MTableBodyRow } from "material-table";
 import Modal from "react-modal";
-import ListRegisterView from './../ListRegisterView/ListRegisterView'
+import ListRegisterView from '../../register/ListRegisterView/ListRegisterView'
 import { Button } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
