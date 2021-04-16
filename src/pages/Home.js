@@ -31,6 +31,8 @@ import ManagerServiceOrder from '../components/service_order/ListServiceOrderVie
 import ItensDrawer from '../components/home/ItensDrawer/ItensDrawer'
 import TableProcess from './../components/process/ListProcessView/ListProcessView'
 import TableSubprocess from './../components/subprocess/ListSubprocessView/ListSubprocessView'
+import TableClient from './../components/client/ListClientView/ListClientView'
+import TableUser from './../components/user/ListUserView/ListUserView'
 
 import {
   BrowserRouter as Router,
@@ -211,7 +213,9 @@ export default function Home() {
           <Switch>
             <Route exact path="/" component={WorkflowDashboard}/>
             <Route exact path="/usuario/cadastrar" component={CreateUserForm}/>
+            <Route exact path="/usuario/gerenciar" component={TableUser}/>
             <Route exact path="/cliente/cadastrar" component={CreateClientForm}/>
+            <Route exact path="/cliente/gerenciar" component={TableClient}/>
             <Route exact path="/processo/cadastrar" component={CreateProcessForm}/>
             <Route exact path="/processo/gerenciar" component={TableProcess}/>
             <Route exact path="/subprocesso/cadastrar" component={CreateSubprocessForm}/>

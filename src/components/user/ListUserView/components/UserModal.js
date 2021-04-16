@@ -19,7 +19,7 @@ class SubprocessModal extends Component {
       return (
         <div style={{ maxHeight: 360}}>
           <Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={6}>
-            <h1>Editar subprocesso</h1>
+            <h1>Editar usuario</h1>
           </Grid>
         </div>
       )

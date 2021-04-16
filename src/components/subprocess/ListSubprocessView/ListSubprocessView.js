@@ -10,7 +10,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import SubprocessModal from './components/SubprocessModal'
-//Modal.setAppElement("#root");
 
 class TableSubprocess extends React.Component {
   

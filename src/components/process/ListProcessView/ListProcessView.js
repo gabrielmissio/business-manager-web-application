@@ -2,8 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import MaterialTable, { MTableBodyRow } from "material-table";
-import Modal from "react-modal";
-import ListRegisterView from '../../register/ListRegisterView/ListRegisterView'
 import { Button } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -29,8 +27,8 @@ class TableProcess extends React.Component {
           page: 0,
           rowsPerPage: 10,
           modalIsOpen: false,
-          serviceOrderId: 0,
-          clientName: ''
+          processId: 0,
+          processName: ''
       };
       
   }
@@ -86,8 +84,8 @@ class TableProcess extends React.Component {
                 <MTableBodyRow
                   {...props}
                   onDoubleClick={e => {
-                    this.setState({serviceOrderId: props.data.id});
-                    this.setState({clientName: props.data.name});
+                    this.setState({processId: props.data.id});
+                    this.setState({processName: props.data.name});
                     this.setState({modalIsOpen: true});
                   }
                 }
@@ -116,7 +114,7 @@ class TableProcess extends React.Component {
         
         <Dialog  fullWidth={true} maxWidth={'md'} aria-labelledby="max-width-dialog-title" open={this.state.modalIsOpen}>
           <DialogTitle id="customized-dialog-title">
-            O.S. {this.state.serviceOrderId} | {this.state.clientName}
+            Id {this.state.processId} | {this.state.processName}
           </DialogTitle>
           <DialogContent dividers>
             <ProcessModal/>

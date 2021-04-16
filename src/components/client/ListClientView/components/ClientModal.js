@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Grid } from '@material-ui/core';
 
 
-class SubprocessModal extends Component {
+class ProcessModal extends Component {
 
   constructor () {
     super();
@@ -19,7 +19,7 @@ class SubprocessModal extends Component {
       return (
         <div style={{ maxHeight: 360}}>
           <Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={6}>
-            <h1>Editar subprocesso</h1>
+            <h1>Editar cliente</h1>
           </Grid>
         </div>
       )
@@ -27,4 +27,4 @@ class SubprocessModal extends Component {
 
 }
 
-export default SubprocessModal;
+export default ProcessModal;
