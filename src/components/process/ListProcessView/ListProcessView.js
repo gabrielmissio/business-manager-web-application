@@ -67,13 +67,6 @@ class TableProcess extends React.Component {
               { field: 'id', title: 'Id', minWidth: 50 },
               { field: 'name', title: 'Identificação', minWidth: 100 },
               {
-                field: 'is_active',
-                title: 'Ativo',
-                minWidth: 50,
-                align: 'right',
-                format: (value) => value.toLocaleString('en-US'),
-              },
-              {
                 field: 'inserted_at',
                 title: 'Abertura',
                 minWidth: 100,
@@ -104,7 +97,7 @@ class TableProcess extends React.Component {
             }}
 
             data={tableData}
-            title="O.S. Abertas"
+            title="Processos ativos"
             options={{
               paging: false
             }}
@@ -134,14 +127,6 @@ class TableProcess extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <Modal
-          isOpen={false}
-          contentLabel="My dialog"
-          >
-          <div>My modal dialog.</div>
-          <Button onClick={()=>{this.setState({modalIsOpen: false})}}>fechar</Button>
-          <ListRegisterView serviceOrderId={this.state.serviceOrderId}/>
-        </Modal>
       </div>
     );
   }
