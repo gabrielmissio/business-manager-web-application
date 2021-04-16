@@ -29,6 +29,7 @@ import ListRegisterView from '../components/register/ListRegisterView/ListRegist
 import Paper from '@material-ui/core/Paper';
 import ManagerServiceOrder from '../components/service_order/ListServiceOrderView/ManagerServiceOrder'
 import ItensDrawer from '../components/home/ItensDrawer/ItensDrawer'
+import TableProcess from './../components/process/ListProcessView/ListProcessView'
 
 import {
   BrowserRouter as Router,
@@ -211,6 +212,7 @@ export default function Home() {
             <Route exact path="/usuario/cadastrar" component={CreateUserForm}/>
             <Route exact path="/cliente/cadastrar" component={CreateClientForm}/>
             <Route exact path="/processo/cadastrar" component={CreateProcessForm}/>
+            <Route exact path="/processo/gerenciar" component={TableProcess}/>
             <Route exact path="/subprocesso/cadastrar" component={CreateSubprocessForm}/>
             <Route exact path="/ordem-de-servico/cadastrar" component={CreateServiceOrderForm}/>
             <Route exact path="/adicionar-registro/mensagem" component={CreateRegisterMessageForm}/>
