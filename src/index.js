@@ -1,10 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './pages/Home';
+import Login from './pages/Login'
+import {
+  BrowserRouter as Router,
+  Switch, Route
+} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home}/> 
+        <Route exact path="/login" component={Login}/> 
+      </Switch>  
+    </Router>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
