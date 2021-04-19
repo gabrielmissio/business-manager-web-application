@@ -41,7 +41,7 @@ function CreateClientForm() {
         event.preventDefault();
     
         var axios = require('axios');
-        var data = JSON.stringify({"name":name, "type":type, "document":document, "birthdate":birthdate, "address":{"country": country, "province": province, "city": city, "zip": zip, "street": street, "address_number": address_number}, "email": email,"phones":[{"phone_numer": phone1},{"phone_numer": phone2}]});
+        var data = JSON.stringify({"name":name, "type":type, "document":document, "birthdate":birthdate, "addresses":[{"country": country, "province": province, "city": city, "zip": zip, "street": street, "address_number": address_number}], "email": email,"phones":[{"phone_number": phone1},{"phone_number": phone2}]});
         
         var config = {
             method: 'post',
