@@ -28,11 +28,8 @@ class SubprocessModal extends Component {
         var data = response.data
         console.log(response.data)
         this.setState({ user: data});
-    });
-    
-    
-    
-}
+    });  
+  }
 
   render() {
       return (
@@ -71,6 +68,22 @@ class SubprocessModal extends Component {
                     <Grid container spacing={4}>
                       <Grid item xs={12}> 
                           <AsyncSelect cacheOptions defaultOptions isMulti/>
+                      </Grid>
+                    </Grid>
+                    <br/>
+                    <Grid container xs={12}>
+                      <Typography color="primary" variant="h6" component="h2" >
+                        Cadastro
+                        <hr/>
+                      </Typography>
+                    </Grid>
+                    <br/>
+                    <Grid container spacing={4}>
+                      <Grid item xs={12} sm={6}>
+                        <TextField disabled size="small" fullWidth variant="outlined"  label="Cadastrado em" defaultValue={this.state.user.inserted_at}/>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField disabled size="small" fullWidth variant="outlined"  label="Atualizado em" defaultValue={this.state.user.updated_at ? this.state.user.updated_at : this.state.user.inserted_at} />
                       </Grid>
                     </Grid>
                     <br/>

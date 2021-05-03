@@ -117,7 +117,7 @@ class TableSubprocess extends React.Component {
             Id {this.state.subprocessId} | {this.state.subprocessName}
           </DialogTitle>
           <DialogContent dividers>
-            <SubprocessModal/>
+            <SubprocessModal subprocessId={this.state.subprocessId}/>
           </DialogContent>
           <DialogActions>
             <Button onClick={()=>{this.setState({modalIsOpen: false})}} autoFocus color="primary">
