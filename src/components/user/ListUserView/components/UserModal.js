@@ -5,9 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-
 import axios from 'axios';
 
 
@@ -18,10 +16,6 @@ class SubprocessModal extends Component {
 
     this.state = {
       user: false,
-      modalRegisterMessage: false,
-      modalRegisterFlowChange: false,
-      modalClientInfo: false,
-      modalFinalizeServiceOrder: false,
     };
     
   }
@@ -57,13 +51,13 @@ class SubprocessModal extends Component {
                     <br/>
                     <Grid container spacing={4}>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.user.name}/>
+                            <TextField disabled size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.user.name}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="user_name" label="Nome de usuario" defaultValue={this.state.user.user_name}/>
+                            <TextField disabled size="small" fullWidth variant="outlined"  name="user_name" label="Nome de usuario" defaultValue={this.state.user.user_name}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="email" label="Email" defaultValue={this.state.user.email}/>
+                            <TextField disabled size="small" fullWidth variant="outlined"  name="email" label="Email" defaultValue={this.state.user.email}/>
                         </Grid>
                     </Grid>
                     <br/>
@@ -88,6 +82,7 @@ class SubprocessModal extends Component {
                         color="primary"
                         fullWidth
                         endIcon={<SendIcon/>}
+                        disabled
                         >
                         Alterar
                     </Button>

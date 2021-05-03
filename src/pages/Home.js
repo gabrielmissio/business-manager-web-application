@@ -110,20 +110,6 @@ export default function Home() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  
-  const [open1, setOpen1] = React.useState(true);
-
-  const [userControl, setUserControl] = React.useState(false);
-
-  const handleClick1 = (event) => {
-    console.log(event)
-    setOpen1((prevOpen1) => !prevOpen1);
-  };
-
-  const handleClick = (event) => {
-    console.log(event)
-    setUserControl((prevUserControl) => !prevUserControl);
-  };
 
   const handleDrawerOpen = () => {
     setOpen(true);

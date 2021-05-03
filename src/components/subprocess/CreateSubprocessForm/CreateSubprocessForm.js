@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React from 'react';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -7,16 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 
-const formReducer = (state, event) => {
-  return {
-   ...state,
-   [event.name]: event.value
- }
-}
-
 function CreateSubprocessForm() {
-
-  const [formData, setFormData] = useReducer(formReducer, {});
 
   const handleSubmit = event => {
     var name = event.target.name.value
@@ -48,13 +39,6 @@ function CreateSubprocessForm() {
     
   }
 
-  const handleChange = event => {
-    setFormData({
-      name: event.target.name,
-      value: event.target.value,
-    });
-  }
-
   return(
     <Container maxWidth="sm">
       <form onSubmit={handleSubmit}>
@@ -78,10 +62,10 @@ function CreateSubprocessForm() {
           <br/>
           <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
-                  <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome"  onChange={handleChange}/>
+                  <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome" />
               </Grid>
               <Grid item xs={12} sm={6}>
-                  <TextField size="small" fullWidth variant="outlined"  name="limit_time" label="Tempo Limite"  onChange={handleChange}/>
+                  <TextField size="small" fullWidth variant="outlined"  name="limit_time" label="Tempo Limite" />
               </Grid>
           </Grid>
           <br/>

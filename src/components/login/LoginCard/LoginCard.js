@@ -5,9 +5,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import SendIcon from '@material-ui/icons/Send';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import LockIcon from '@material-ui/icons/Lock';
 

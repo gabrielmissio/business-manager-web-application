@@ -30,8 +30,6 @@ class CreateRegisterMessageForm extends React.Component {
     
     const handleSubmit = event => {        
     var message = event.target.message.value
-    var title = 'Adicionado comentario'
-    var is_changed = false
     var user_id = 1
   
     event.preventDefault();

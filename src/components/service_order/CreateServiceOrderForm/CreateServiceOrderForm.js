@@ -5,7 +5,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
-import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
 import axios from 'axios';
 
@@ -37,7 +36,7 @@ class CreateServiceOrderForm extends React.Component {
             this.setState({ process: options}, () => loadSubprocessOptions());
         });        
         //
-        var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client'
+        url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client'
         axios.get(url, {
             responseType: 'json'
         }).then(response => {
