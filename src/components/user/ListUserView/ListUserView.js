@@ -117,7 +117,7 @@ class TableUser extends React.Component {
             Id {this.state.userId} | {this.state.userName}
           </DialogTitle>
           <DialogContent dividers>
-            <UserModal/>
+            <UserModal userId={this.state.userId}/>
           </DialogContent>
           <DialogActions>
             <Button onClick={()=>{this.setState({modalIsOpen: false})}} autoFocus color="primary">

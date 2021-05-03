@@ -1,5 +1,14 @@
 import React, {Component} from 'react';
 import { Grid } from '@material-ui/core';
+import AsyncSelect from 'react-select/async';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+
+import axios from 'axios';
 
 
 class SubprocessModal extends Component {
@@ -8,6 +17,7 @@ class SubprocessModal extends Component {
     super();
 
     this.state = {
+      user: false,
       modalRegisterMessage: false,
       modalRegisterFlowChange: false,
       modalClientInfo: false,
@@ -15,12 +25,81 @@ class SubprocessModal extends Component {
     };
     
   }
+
+  componentDidMount() {
+    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/user/'+this.props.userId
+    axios.get(url, {
+        responseType: 'json'
+    }).then(response => {
+        var data = response.data
+        console.log(response.data)
+        this.setState({ user: data});
+    });
+    
+    
+    
+}
+
   render() {
       return (
-        <div style={{ maxHeight: 360}}>
-          <Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={6}>
-            <h1>Editar usuario</h1>
-          </Grid>
+        <div>
+            {
+              this.state.user ?
+                <Container maxWidth="sm">
+                <form >
+                  <Grid container direction="column" justify="space-between" alignItems="flex-start">
+                    <Grid container xs={12}>
+                      <Typography color="primary" variant="h6" component="h2" >
+                          Identificação
+                          <hr/>
+                      </Typography>
+                    </Grid>
+                    <br/>
+                    <Grid container spacing={4}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.user.name}/>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField size="small" fullWidth variant="outlined"  name="user_name" label="Nome de usuario" defaultValue={this.state.user.user_name}/>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField size="small" fullWidth variant="outlined"  name="email" label="Email" defaultValue={this.state.user.email}/>
+                        </Grid>
+                    </Grid>
+                    <br/>
+                    <Grid container xs={12}>
+                        <Typography color="primary" variant="h6" component="h2" >
+                            Permições
+                            <hr/>
+                        </Typography>
+                    </Grid>
+                    <br/>
+                    <Grid container spacing={4}>
+                      <Grid item xs={12}> 
+                          <AsyncSelect cacheOptions defaultOptions isMulti/>
+                      </Grid>
+                    </Grid>
+                    <br/>
+                    <Grid container xs={12} sm={12}>
+                        <Button
+                        type="submit"
+                        disableElevation
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        endIcon={<SendIcon/>}
+                        >
+                        Alterar
+                    </Button>
+
+                    </Grid>
+                    
+                  </Grid>
+                  
+              </form>        
+            </Container>
+              : 'Loading'
+            }
         </div>
       )
   } 
