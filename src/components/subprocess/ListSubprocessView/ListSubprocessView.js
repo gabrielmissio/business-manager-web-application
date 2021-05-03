@@ -10,6 +10,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import SubprocessModal from './components/SubprocessModal'
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import { Grid } from '@material-ui/core';
 
 class TableSubprocess extends React.Component {
   
@@ -95,7 +98,7 @@ class TableSubprocess extends React.Component {
             }}
 
             data={tableData}
-            title="Subprocessos ativos"
+            title="Subprocessos cadastrados"
             options={{
               paging: false
             }}
@@ -113,9 +116,14 @@ class TableSubprocess extends React.Component {
         />
         
         <Dialog  fullWidth={true} maxWidth={'md'} aria-labelledby="max-width-dialog-title" open={this.state.modalIsOpen}>
-          <DialogTitle id="customized-dialog-title">
-            Id {this.state.subprocessId} | {this.state.subprocessName}
-          </DialogTitle>
+          <Grid container justify="space-between" maxWidth={'md'} style={{backgroundColor: '#3f51b5', color:'#fff'}}>
+            <DialogTitle id="customized-dialog-title">
+              {this.state.subprocessName}
+            </DialogTitle>
+            <IconButton aria-label="close" onClick={()=>{this.setState({modalIsOpen: false})}}>
+              <CloseIcon fontSize='large' style={{ color: '#fff' }}/>
+            </IconButton>
+          </Grid>
           <DialogContent dividers>
             <SubprocessModal subprocessId={this.state.subprocessId}/>
           </DialogContent>

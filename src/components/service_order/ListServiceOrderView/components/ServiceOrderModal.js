@@ -7,10 +7,11 @@ import Container from '@material-ui/core/Container';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
 import CreateRegisterMessageForm from '../../../register/CreateRegisterForms/CreateRegisterMessageForm'
 import CreateRegisterProcessSubprocessForm from '../../../register/CreateRegisterForms/CreateRegisterProcessSubprocessForm'
 import ClientView from '../../../client/EntityView/ClientView'
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 class ServiceOrderModal extends Component {
 
@@ -68,59 +69,59 @@ class ServiceOrderModal extends Component {
           </Grid>
           
           <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalClientInfo}>
-            <DialogTitle id="customized-dialog-title">
-              Informações do cliente
-            </DialogTitle>
+            <Grid container justify="space-between" maxWidth={'md'} style={{backgroundColor: '#3f51b5', color:'#fff'}}>
+              <DialogTitle id="customized-dialog-title">
+                Informações do cliente
+              </DialogTitle>
+              <IconButton aria-label="close" onClick={()=>{this.setState({modalClientInfo: false})}}>
+                <CloseIcon fontSize='large' style={{ color: '#fff' }}/>
+              </IconButton>
+            </Grid>
             <DialogContent dividers>
               <ClientView serviceOrderId={this.props.serviceOrderId}/>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={()=>{this.setState({modalClientInfo: false})}} autoFocus color="primary">
-                fechar
-              </Button>
-            </DialogActions>
           </Dialog>
 
           <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalRegisterMessage}>
-            <DialogTitle id="customized-dialog-title">
-              Adicionar Registro
-            </DialogTitle>
+            <Grid container justify="space-between" maxWidth={'md'} style={{backgroundColor: '#3f51b5', color:'#fff'}}>
+              <DialogTitle id="customized-dialog-title">
+                Adicionar Registro
+              </DialogTitle>
+              <IconButton aria-label="close" onClick={()=>{this.setState({modalRegisterMessage: false})}}>
+                <CloseIcon fontSize='large' style={{ color: '#fff' }}/>
+              </IconButton>
+            </Grid>
             <DialogContent dividers>
               <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId} messageTitle='Adicionado comentario' keepOpenServiceOrder={true} is_changed={false}/>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={()=>{this.setState({modalRegisterMessage: false})}} autoFocus color="primary">
-                fechar
-              </Button>
-            </DialogActions>
           </Dialog>
 
           <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalRegisterFlowChange}>
-            <DialogTitle id="customized-dialog-title">
-              Adicionar Registro
-            </DialogTitle>
+            <Grid container justify="space-between" maxWidth={'md'} style={{backgroundColor: '#3f51b5', color:'#fff'}}>
+              <DialogTitle id="customized-dialog-title">
+                Adicionar Registro
+              </DialogTitle>
+              <IconButton aria-label="close" onClick={()=>{this.setState({modalRegisterFlowChange: false})}}>
+                <CloseIcon fontSize='large' style={{ color: '#fff' }}/>
+              </IconButton>
+            </Grid>
             <DialogContent dividers>
               <CreateRegisterProcessSubprocessForm serviceOrderId={this.props.serviceOrderId} messageTitle='Alterado Processo/Subprocesso'/>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={()=>{this.setState({modalRegisterFlowChange: false})}} autoFocus color="primary">
-                fechar
-              </Button>
-            </DialogActions>
           </Dialog>
 
           <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={this.state.modalFinalizeServiceOrder}>
-            <DialogTitle id="customized-dialog-title">
-              Encerrar O.S. | {this.props.serviceOrderId}
-            </DialogTitle>
+            <Grid container justify="space-between" maxWidth={'md'} style={{backgroundColor: '#3f51b5', color:'#fff'}}>
+              <DialogTitle id="customized-dialog-title">
+                Encerrar O.S. | {this.props.serviceOrderId}
+              </DialogTitle>
+              <IconButton aria-label="close" onClick={()=>{this.setState({modalFinalizeServiceOrder: false})}}>
+                <CloseIcon fontSize='large' style={{ color: '#fff' }}/>
+              </IconButton>
+            </Grid>
             <DialogContent dividers>
               <CreateRegisterMessageForm serviceOrderId={this.props.serviceOrderId} messageTitle='Teste finalizar O.S.' keepOpenServiceOrder={false} is_changed={true}/>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={()=>{this.setState({modalFinalizeServiceOrder: false})}} autoFocus color="primary">
-                fechar
-              </Button>
-            </DialogActions>
           </Dialog>
 
         </div>

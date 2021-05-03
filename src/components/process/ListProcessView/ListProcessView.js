@@ -2,15 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import MaterialTable, { MTableBodyRow } from "material-table";
-import { Button } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
 import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import ProcessModal from './components/ProcessModal'
-//Modal.setAppElement("#root");
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import { Grid } from '@material-ui/core';
 
 class TableProcess extends React.Component {
   
@@ -95,7 +95,7 @@ class TableProcess extends React.Component {
             }}
 
             data={tableData}
-            title="Processos ativos"
+            title="Processos cadastrados"
             options={{
               paging: false
             }}
@@ -113,17 +113,18 @@ class TableProcess extends React.Component {
         />
         
         <Dialog  fullWidth={true} maxWidth={'md'} aria-labelledby="max-width-dialog-title" open={this.state.modalIsOpen}>
-          <DialogTitle id="customized-dialog-title">
-            Id {this.state.processId} | {this.state.processName}
-          </DialogTitle>
+          <Grid container justify="space-between" maxWidth={'md'} style={{backgroundColor: '#3f51b5', color:'#fff'}}>
+            <DialogTitle id="customized-dialog-title">
+              {this.state.processName}
+            </DialogTitle>
+            <IconButton aria-label="close" onClick={()=>{this.setState({modalIsOpen: false})}}>
+              <CloseIcon fontSize='large' style={{ color: '#fff' }}/>
+            </IconButton>
+          </Grid>
           <DialogContent dividers>
-            <ProcessModal/>
+            <ProcessModal processId={this.state.processId}/>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={()=>{this.setState({modalIsOpen: false})}} autoFocus color="primary">
-              fechar
-            </Button>
-          </DialogActions>
+          
         </Dialog>
       </div>
     );
