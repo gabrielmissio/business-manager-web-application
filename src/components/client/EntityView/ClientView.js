@@ -6,16 +6,17 @@ import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 
 class ClientView extends React.Component {
 
     state = {
-        client: [],
-        address: [],
-        phones: {},
-        phone1: '-',
-        service_order: []
+        client: false,
+        service_order: [],
+        isEditable: true
     };
 
     componentDidMount() {
@@ -28,103 +29,141 @@ class ClientView extends React.Component {
             this.setState({ service_order: data}, () => loadClientInformation());
         });
         const loadClientInformation = () => {
-        var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client/'+this.state.service_order.client.id
-        axios.get(url, {
-            responseType: 'json'
-        }).then(response => {
-            var data = response.data
-            console.log(response.data)      
-            this.setState({ client: data});
-            this.setState({ address: data.addresses[0]})
-            this.setState({ phones: data.phones}, () => this.setState({ phone1: this.state.phones[0].phone_number}))
-            // () => this.setState({ address: this.state.client.addresses[0]}), this.setState({ phones: this.state.client.phones[0]})
-        });
+            var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client/'+this.state.service_order.client.id
+            axios.get(url, {
+                responseType: 'json'
+            }).then(response => {
+                var data = response.data
+                console.log(response.data)      
+                this.setState({ client: data});
+            });
         }
         
     }
 
     render() {
         return (
-            <Container maxWidth="sm">
-                <Grid container direction="column" justify="space-between" alignItems="flex-start">
-                    <Grid container xs={12}>
-                        <Typography color="primary" variant="h6" component="h2" >
-                            Identificação
-                            <hr/>
-                        </Typography>
-                    </Grid>
-                    <br/>
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="name" label="Name" value={this.state.client.name} defaultValue={'-'}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="document" label="Documento" value={this.state.client.document} defaultValue={'-'}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento" value={this.state.client.birthdate} defaultValue={'-'}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <Grid container item xs={12} >
-                                <RadioGroup row aria-label="gender" name="gender1" value={this.state.client.type} defaultValue={'NP'} >
-                                    <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />
-                                    <FormControlLabel value="LP" control={<Radio color="primary"/>} label="PJ" />
-                                </RadioGroup>       
-                            </Grid>   
-                        </Grid>
-                    </Grid>
+            <div>
+                {
+                    this.state.client ?
+                    <Container maxWidth="sm">
+                        <form >
+                        <Grid container direction="column" justify="space-between" alignItems="flex-start">
+                            <Grid container xs={12}>
+                                <Checkbox
+                                checked={!this.state.isEditable}
+                                onChange={() => {this.setState({ isEditable: !this.state.isEditable})}}
+                                name="checkedF"
+                                defaultChecked
+                                color="primary"
+                                />
+                                <h4>Edição habilitada</h4>
+                            </Grid>
+                            <Grid container xs={12}>
+                                <Typography color="primary" variant="h6" component="h2" >
+                                    Identificação
+                                    <hr/>
+                                </Typography>
+                            </Grid>
+                            <br/>
+                            <Grid container spacing={4}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="name" label="Name" defaultValue={this.state.client.name}/>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="document" label="Documento" defaultValue={this.state.client.document}/>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento" defaultValue={this.state.client.birthdate}/>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Grid container item xs={12} >
+                                        <RadioGroup row aria-label="gender" name="gender1" value={this.state.client.type} >
+                                            <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />
+                                            <FormControlLabel value="LP" control={<Radio color="primary"/>} label="PJ" />
+                                        </RadioGroup>       
+                                    </Grid>   
+                                </Grid>
+                            </Grid>
 
 
-                    <br/>
-                    <Grid container xs={12}>
-                        <Typography color="primary" variant="h6" component="h2" >
-                            Endereço
-                            <hr/>
-                        </Typography>
-                    </Grid>
-                    <br/>
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="country" label="Pais" value={this.state.address.country} defaultValue={'-'}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="province" label="Estado" value={this.state.address.province} defaultValue={'-'}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="city" label="Cidade" value={this.state.address.city} defaultValue={'-'}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="zip" label="CEP" value={this.state.address.zip} defaultValue={'-'}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="street" label="Rua" value={this.state.address.street} defaultValue={'-'}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="address_number" label="Numero" value={this.state.address.address_number} defaultValue={'-'}/>
-                        </Grid>
-                    </Grid>
+                            <br/>
+                            <Grid container xs={12}>
+                                <Typography color="primary" variant="h6" component="h2" >
+                                    Endereço
+                                    <hr/>
+                                </Typography>
+                            </Grid>
+                            <br/>
+                            {
+                                this.state.client.addresses.map((d, i) => (
+                                    <Grid container spacing={4}>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField disabled={this.state.isEditable} size="small" variant="outlined" fullWidth name="country" label="Pais" defaultValue={d.country}/>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField disabled={this.state.isEditable} size="small" variant="outlined" fullWidth name="province" label="Estado" defaultValue={d.province}/>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField disabled={this.state.isEditable} size="small" variant="outlined" fullWidth name="city" label="Cidade" defaultValue={d.city}/>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField disabled={this.state.isEditable} size="small" variant="outlined" fullWidth name="zip" label="CEP" defaultValue={d.zip}/>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField disabled={this.state.isEditable} size="small" variant="outlined" fullWidth name="street" label="Rua" defaultValue={d.street}/>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField disabled={this.state.isEditable} size="small" variant="outlined" fullWidth name="address_number" label="Numero" defaultValue={d.address_number}/>
+                                        </Grid>
+                                    </Grid>
 
-                    <br/>
-                    <Grid container xs={12}>
-                        <Typography color="primary" variant="h6" component="h2" >
-                            Contato
-                            <hr/>
-                        </Typography>
-                    </Grid>
-                    <br/>
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="email" label="Email" value={'example@mail.com'} defaultValue={'-'}/>
+                                  ))
+                            }
+                            
+                            <br/>
+                            <Grid container xs={12}>
+                                <Typography color="primary" variant="h6" component="h2" >
+                                    Contato
+                                    <hr/>
+                                </Typography>
+                            </Grid>
+                            <br/>
+                            <Grid container spacing={4}>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField disabled={this.state.isEditable} size="small" variant="outlined" fullWidth name="email" label="Email" defaultValue={'client@domain.com.br'}/>
+                                </Grid>
+                                {
+                                    this.state.client.phones.map((d, i) => (
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField disabled={this.state.isEditable} size="small" variant="outlined" fullWidth name="phone1" label="Telefone 1" defaultValue={d.phone_number}/>
+                                        </Grid>
+                                    ))
+                                }
+                                
+                            </Grid>
+                            <br/>
+                            <Grid container xs={12} sm={12}>
+                                <Button
+                                type="submit"
+                                disableElevation
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                endIcon={<SendIcon/>}
+                                >
+                                Alterar
+                            </Button>
+
+                            </Grid>
+                            
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="phone1" label="Telefone 1" value={this.state.phone1}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField size="small" variant="outlined" fullWidth name="phone2" label="Telefone 2" value={this.state.phone1}/>
-                        </Grid>
-                    </Grid> 
-                </Grid>
-            </Container>
+                        
+                    </form>        
+                    </Container>
+                    : 'Loading'
+                }
+            </div>   
         )
     } 
 }

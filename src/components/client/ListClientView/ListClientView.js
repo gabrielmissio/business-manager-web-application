@@ -123,7 +123,7 @@ class TableClient extends React.Component {
             </IconButton>
           </Grid>
           <DialogContent dividers>
-            <ClientModal/>
+            <ClientModal clientId={this.state.clientId}/>
           </DialogContent>
         </Dialog>
       </div>
