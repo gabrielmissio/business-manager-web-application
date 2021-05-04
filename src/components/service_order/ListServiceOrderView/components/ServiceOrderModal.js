@@ -23,6 +23,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import PersonIcon from '@material-ui/icons/Person';
+import CommentIcon from '@material-ui/icons/Comment';
+import NearMeIcon from '@material-ui/icons/NearMe';
+import DoneIcon from '@material-ui/icons/Done';
 
 class ServiceOrderModal extends Component {
 
@@ -46,40 +50,73 @@ class ServiceOrderModal extends Component {
                 <ListRegisterView serviceOrderId={this.props.serviceOrderId} />
               </div>
             </Grid>
-              <Grid item xs={12} sm={4}>
-                <Container maxWidth="sm">
-                    <Grid container direction="column" justify="space-between" alignItems="flex-start">
-                      <Grid container spacing={4}>
-                          <Grid item xs={12} sm={12} direction='row'> 
-                            <Button onClick={()=>{this.setState({modalClientInfo: true})}} disableElevation variant="contained" style={{borderRadius: '100%'}} >
-                              <SendIcon color="primary" fontSize='large'> </SendIcon> 
-                            </Button>
-                            <Typography>
-                              Info
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={12}>
-                            <Button onClick={()=>{this.setState({modalRegisterMessage: true})}} disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
-                              Adicionar comentario
-                            </Button>
-                          </Grid>
-                          <Grid item xs={12} sm={12}>
-                            <Button onClick={()=>{this.setState({modalRegisterFlowChange: true})}} disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
-                              Alterar processo/subprocesso
-                            </Button>
-                          </Grid>
-                          <Grid item xs={12} sm={12}>
-                            <Button onClick={()=>{this.setState({modalFinalizeServiceOrder: true})}} disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
-                              Encerrar O.S.
-                            </Button>
-                          </Grid>
-                      </Grid>
-          
+            <Grid item xs={12} sm={4}>
+              <Container maxWidth="sm">
+                <Grid container direction="column" justify="space-between" alignItems="flex-start">
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={12} alignItems='flex-start'> 
+                      <Button fullWidth onClick={()=>{this.setState({modalClientInfo: true})}} >
+                        <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
+                          <PersonIcon style={{color: '#fff'}} fontSize='large'> </PersonIcon> 
+                        </Button>
+                        <div style={{padding: 18}}>
+
+                        </div>
+                        <Typography>
+                          Cliente
+                        </Typography>
+                      </Button>
                       
                     </Grid>
+                    <Grid item xs={12} sm={12} alignItems='flex-start'> 
+                      <Button fullWidth onClick={()=>{this.setState({modalRegisterMessage: true})}}>
+                        <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
+                          <CommentIcon style={{color: '#fff'}} fontSize='large'> </CommentIcon> 
+                        </Button>
+                        <div style={{padding: 18}}>
+
+                        </div>
+                        <Typography>
+                          Comentar
+                        </Typography>
+                      </Button>  
+                    </Grid>
+                    <Grid item xs={12} sm={12} alignItems='flex-start'> 
+                      <Button fullWidth onClick={()=>{this.setState({modalRegisterFlowChange: true})}}>
+                        <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
+                          <NearMeIcon style={{color: '#fff'}} fontSize='large'> </NearMeIcon> 
+                        </Button>
+                        <div style={{padding: 18}}>
+
+                        </div>
+                        <Typography>
+                          Alterar
+                        </Typography>
+                      </Button>  
+                    </Grid>
+                    <Grid item xs={12} sm={12} alignItems='flex-start'> 
+                      <Button fullWidth onClick={()=>{this.setState({modalFinalizeServiceOrder: true})}}>
+                        <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
+                          <DoneIcon style={{color: '#fff'}} fontSize='large'> </DoneIcon> 
+                        </Button>
+                        <div style={{padding: 18}}>
+
+                        </div>
+                        <Typography>
+                          Encerrar
+                        </Typography>
+                      </Button>  
+                    </Grid>
+                        
+                        
+                        
+                    </Grid>
+        
                     
-              </Container>
-            </Grid>
+                  </Grid>
+                  
+            </Container>
+          </Grid>
             
           </Grid>
           
