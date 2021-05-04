@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
+import Checkbox from '@material-ui/core/Checkbox';
 import Select from 'react-select/async';
 
 class ProcessModal extends React.Component {
@@ -14,7 +15,8 @@ class ProcessModal extends React.Component {
     super();
 
     this.state = {
-      process: false
+      process: false,
+      isEditable: true
     };
     
   }
@@ -37,6 +39,16 @@ class ProcessModal extends React.Component {
               <form >
                 <Grid container direction="column" justify="space-between" alignItems="flex-start">
                   <Grid container xs={12}>
+                    <Checkbox
+                      checked={!this.state.isEditable}
+                      onChange={() => {this.setState({ isEditable: !this.state.isEditable})}}
+                      name="checkedF"
+                      defaultChecked
+                      color="primary"
+                    />
+                    <h4>Edição habilitada</h4>
+                  </Grid>
+                  <Grid container xs={12}>
                     <Typography color="primary" variant="h6" component="h2" >
                       Identificação
                       <hr/>
@@ -45,7 +57,7 @@ class ProcessModal extends React.Component {
                   <br/>
                   <Grid container spacing={4}>
                     <Grid item xs={12} sm={12}>
-                      <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.process.name}/>
+                      <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.process.name}/>
                     </Grid>
                   </Grid>
                   <br/>
@@ -86,7 +98,7 @@ class ProcessModal extends React.Component {
                       color="primary"
                       fullWidth
                       endIcon={<SendIcon/>}
-                      disabled
+                      disabled={this.state.isEditable}
                     >
                       Alterar
                     </Button>

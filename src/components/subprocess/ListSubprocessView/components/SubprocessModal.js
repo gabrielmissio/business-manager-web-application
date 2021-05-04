@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
+import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
 
 
@@ -14,7 +15,8 @@ class SubprocessModal extends Component {
     super();
 
     this.state = {
-      subprocess: false
+      subprocess: false,
+      isEditable: true
     };
     
   }
@@ -68,6 +70,17 @@ class SubprocessModal extends Component {
             <form onSubmit={handleSubmit}>
               <Grid container direction="column" justify="space-between" alignItems="flex-start">
                 <Grid container xs={12}>
+                  <Checkbox
+                    checked={!this.state.isEditable}
+                    onChange={() => {this.setState({ isEditable: !this.state.isEditable})}}
+                    name="checkedF"
+                    defaultChecked
+                    color="primary"
+                  />
+                  <h4>Edição habilitada</h4>
+                </Grid>
+                <br/>
+                <Grid container xs={12}>
                   <Typography color="primary" variant="h6" component="h2" >
                     Identificação
                     <hr/>
@@ -76,10 +89,10 @@ class SubprocessModal extends Component {
                 <br/>
                 <Grid container spacing={4}>
                   <Grid item xs={12} sm={6}>
-                    <TextField disabled size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.subprocess.name}/>
+                    <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.subprocess.name}/>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField disabled size="small" fullWidth variant="outlined"  name="limit_time" label="Tempo Limite" defaultValue={this.state.subprocess.limit_time} />
+                    <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="limit_time" label="Tempo Limite" defaultValue={this.state.subprocess.limit_time} />
                   </Grid>
                 </Grid>
                 <br/>
@@ -107,7 +120,7 @@ class SubprocessModal extends Component {
                     color="primary"
                     fullWidth
                     endIcon={<SendIcon/>}
-                    disabled
+                    disabled={this.state.isEditable}
                     >
                     Alterar
                   </Button>
