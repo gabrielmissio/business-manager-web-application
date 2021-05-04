@@ -55,7 +55,7 @@ class ServiceOrderModal extends Component {
                 <Grid container direction="column" justify="space-between" alignItems="flex-start">
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={12} alignItems='flex-start'> 
-                      <Button fullWidth onClick={()=>{this.setState({modalClientInfo: true})}} >
+                      <Button fullWidth onClick={()=>{this.setState({modalClientInfo: true})}} style={{justifyContent:'flex-start'}}>
                         <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
                           <PersonIcon style={{color: '#fff'}} fontSize='large'> </PersonIcon> 
                         </Button>
@@ -69,7 +69,7 @@ class ServiceOrderModal extends Component {
                       
                     </Grid>
                     <Grid item xs={12} sm={12} alignItems='flex-start'> 
-                      <Button fullWidth onClick={()=>{this.setState({modalRegisterMessage: true})}}>
+                      <Button fullWidth onClick={()=>{this.setState({modalRegisterMessage: true})}} style={{justifyContent:'flex-start'}}>
                         <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
                           <CommentIcon style={{color: '#fff'}} fontSize='large'> </CommentIcon> 
                         </Button>
@@ -82,7 +82,7 @@ class ServiceOrderModal extends Component {
                       </Button>  
                     </Grid>
                     <Grid item xs={12} sm={12} alignItems='flex-start'> 
-                      <Button fullWidth onClick={()=>{this.setState({modalRegisterFlowChange: true})}}>
+                      <Button fullWidth onClick={()=>{this.setState({modalRegisterFlowChange: true})}} style={{justifyContent:'flex-start'}}>
                         <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
                           <NearMeIcon style={{color: '#fff'}} fontSize='large'> </NearMeIcon> 
                         </Button>
@@ -95,16 +95,17 @@ class ServiceOrderModal extends Component {
                       </Button>  
                     </Grid>
                     <Grid item xs={12} sm={12} alignItems='flex-start'> 
-                      <Button fullWidth onClick={()=>{this.setState({modalFinalizeServiceOrder: true})}}>
-                        <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
-                          <DoneIcon style={{color: '#fff'}} fontSize='large'> </DoneIcon> 
-                        </Button>
-                        <div style={{padding: 18}}>
+                      <Button fullWidth onClick={()=>{this.setState({modalFinalizeServiceOrder: true})}} style={{justifyContent:'flex-start'}}>
+                          <Button disabled color='primary' disableElevation variant="contained" style={{borderRadius: '100%', height: 60, backgroundColor: '#3f51b5'}} >
+                            <DoneIcon style={{color: '#fff'}} fontSize='large'> </DoneIcon> 
+                          </Button>
+                          <div style={{padding: 18}}>
 
-                        </div>
-                        <Typography>
-                          Encerrar
-                        </Typography>
+                          </div>
+                          <Typography>
+                            Encerrar
+                          </Typography>
+                        
                       </Button>  
                     </Grid>
                         

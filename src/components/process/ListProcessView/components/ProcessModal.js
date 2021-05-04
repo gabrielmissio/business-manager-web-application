@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Checkbox from '@material-ui/core/Checkbox';
-import Select from 'react-select/async';
+import Select from 'react-select';
 
 class ProcessModal extends React.Component {
 
@@ -16,7 +16,8 @@ class ProcessModal extends React.Component {
 
     this.state = {
       process: false,
-      isEditable: true
+      isEditable: true,
+      subprocess: []
     };
     
   }
@@ -28,7 +29,20 @@ class ProcessModal extends React.Component {
         var data = response.data
         console.log(response.data)
         this.setState({process: data});
-    });  
+    });
+    url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/subprocess'
+    axios.get(url, {
+        responseType: 'json'
+    }).then(response => {
+        var data = response.data
+        const options = data.subprocess.map(d => ({
+          "value" : d.id,
+          "label" : d.name
+        }))
+        options.map((v) => {console.log(v)})
+        this.setState({subprocess: options});
+    });
+  
   }
   render() {
       return (
@@ -70,7 +84,7 @@ class ProcessModal extends React.Component {
                   <br/>
                   <Grid container spacing={4}>
                     <Grid item xs={12}> 
-                      <Select cacheOptions defaultOptions isMulti/>
+                      <Select isDisabled={this.state.isEditable} options={this.state.subprocess} isMulti defaultValue={this.state.process.subprocess.map(d => ({"value" : d.id, "label" : d.name}))}/>
                     </Grid>
                   </Grid>
                   <br/>

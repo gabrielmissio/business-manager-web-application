@@ -137,6 +137,7 @@ class ClientView extends React.Component {
                             <br/>
                             <Grid container xs={12} sm={12}>
                                 <Button
+                                disabled={this.state.isEditable}
                                 type="submit"
                                 disableElevation
                                 variant="contained"
