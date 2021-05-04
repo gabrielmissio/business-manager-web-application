@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Container from '@material-ui/core/Container';
+import Checkbox from '@material-ui/core/Checkbox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import axios from 'axios';
 
 
@@ -16,6 +19,7 @@ class SubprocessModal extends Component {
 
     this.state = {
       user: false,
+      isEditable: true
     };
     
   }
@@ -40,6 +44,17 @@ class SubprocessModal extends Component {
                 <form >
                   <Grid container direction="column" justify="space-between" alignItems="flex-start">
                     <Grid container xs={12}>
+                      <Checkbox
+                        checked={!this.state.isEditable}
+                        onChange={() => {this.setState({ isEditable: !this.state.isEditable})}}
+                        name="checkedF"
+                        defaultChecked
+                        color="primary"
+                      />
+                      <h4>Edição habilitada</h4>
+                    </Grid>
+                    <br/>
+                    <Grid container xs={12}>
                       <Typography color="primary" variant="h6" component="h2" >
                           Identificação
                           <hr/>
@@ -48,13 +63,13 @@ class SubprocessModal extends Component {
                     <br/>
                     <Grid container spacing={4}>
                         <Grid item xs={12} sm={6}>
-                            <TextField disabled size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.user.name}/>
+                            <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.user.name}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField disabled size="small" fullWidth variant="outlined"  name="user_name" label="Nome de usuario" defaultValue={this.state.user.user_name}/>
+                            <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="user_name" label="Nome de usuario" defaultValue={this.state.user.user_name}/>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField disabled size="small" fullWidth variant="outlined"  name="email" label="Email" defaultValue={this.state.user.email}/>
+                            <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="email" label="Email" defaultValue={this.state.user.email}/>
                         </Grid>
                     </Grid>
                     <br/>
@@ -67,7 +82,7 @@ class SubprocessModal extends Component {
                     <br/>
                     <Grid container spacing={4}>
                       <Grid item xs={12}> 
-                          <AsyncSelect cacheOptions defaultOptions isMulti/>
+                          <AsyncSelect disabled={this.state.isEditable} cacheOptions defaultOptions isMulti/>
                       </Grid>
                     </Grid>
                     <br/>
@@ -95,7 +110,7 @@ class SubprocessModal extends Component {
                         color="primary"
                         fullWidth
                         endIcon={<SendIcon/>}
-                        disabled
+                        disabled={this.state.isEditable}
                         >
                         Alterar
                     </Button>
