@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import ListRegisterView from '../../../register/ListRegisterView/ListRegisterView'
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
@@ -12,6 +12,17 @@ import CreateRegisterProcessSubprocessForm from '../../../register/CreateRegiste
 import ClientView from '../../../client/EntityView/ClientView'
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
 class ServiceOrderModal extends Component {
 
@@ -28,19 +39,24 @@ class ServiceOrderModal extends Component {
   }
   render() {
       return (
-        <div style={{ maxHeight: 360}}>
+        <div style={{ maxHeight: 360, overflow: 'hidden'}}>
           <Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={6}>
             <Grid item xs={12} sm={8}>
-              <ListRegisterView serviceOrderId={this.props.serviceOrderId}/>
+              <div style={{overflowY: 'scroll', flex: '1', maxHeight: 300 }}>
+                <ListRegisterView serviceOrderId={this.props.serviceOrderId} />
+              </div>
             </Grid>
               <Grid item xs={12} sm={4}>
                 <Container maxWidth="sm">
                     <Grid container direction="column" justify="space-between" alignItems="flex-start">
                       <Grid container spacing={4}>
-                          <Grid item xs={12} sm={12}> 
-                            <Button onClick={()=>{this.setState({modalClientInfo: true})}} disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
-                              Informações do cliente
+                          <Grid item xs={12} sm={12} direction='row'> 
+                            <Button onClick={()=>{this.setState({modalClientInfo: true})}} disableElevation variant="contained" style={{borderRadius: '100%'}} >
+                              <SendIcon color="primary" fontSize='large'> </SendIcon> 
                             </Button>
+                            <Typography>
+                              Info
+                            </Typography>
                           </Grid>
                           <Grid item xs={12} sm={12}>
                             <Button onClick={()=>{this.setState({modalRegisterMessage: true})}} disableElevation variant="contained" color="primary" fullWidth endIcon={<SendIcon/>}>
@@ -63,7 +79,6 @@ class ServiceOrderModal extends Component {
                     </Grid>
                     
               </Container>
-                
             </Grid>
             
           </Grid>
