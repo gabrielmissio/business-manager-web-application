@@ -7,7 +7,15 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import LockIcon from '@material-ui/icons/Lock';
+import { Auth } from 'aws-amplify';
 
+async function signIn(username, password) {
+    try {
+        const user = await Auth.signIn(username, password);
+    } catch (error) {
+        console.log('error signing in', error);
+    }
+}
 
 class LoginCard extends React.Component {
   
@@ -27,11 +35,17 @@ class LoginCard extends React.Component {
   }
 
     render () {
+        const handleSubmit = event => {
+            const username = event.target.user.value
+            const password = event.target.password.value
+            signIn(username, password)
+            event.preventDefault();
+        }
         return (
             <Container maxWidth="xs">
-                <Paper style={{ padding: 26, minHeight: '60.8vh', backgroundColor: '#FBFBFC'}} elevation={3} >
-                    <form >
-                        <Grid container direction="column" justify="space-between" alignItems="flex-start">
+                <Paper style={{ padding: 26, minHeight: '60.8vh', backgroundColor: '#FBFBFC', justifyContent:'center'}} elevation={3} >
+                    <form onSubmit={handleSubmit}>
+                        <Grid container direction="column" justify="space-between" alignItems="flex-start" spacing={4}>
                             <Grid  container item xs={12} alignItems="flex-start" justify="center">
                             <Typography color="primary" variant="h6" align="center" component="h2"  alignItems="center" justify="center">
                                 <Box fontWeight="fontWeightBold">
