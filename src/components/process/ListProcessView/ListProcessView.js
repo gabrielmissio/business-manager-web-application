@@ -35,7 +35,7 @@ class TableProcess extends React.Component {
 
 
   componentDidMount () {
-    var url = 'https://ovxslxadt5.execute-api.us-east-1.amazonaws.com/dev/process?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage
+    var url = 'https://t08w33898k.execute-api.us-east-1.amazonaws.com/hml/patient'//process?page=+this.state.page+'&paginate_by='+this.state.rowsPerPage
     axios.get(url, {
         responseType: 'json'
     }).then(response => {

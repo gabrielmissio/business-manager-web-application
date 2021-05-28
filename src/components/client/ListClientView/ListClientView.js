@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import ReactDOM from 'react-dom';
 import MaterialTable, { MTableBodyRow } from "material-table";
 import Dialog from '@material-ui/core/Dialog';
@@ -11,7 +10,6 @@ import ClientModal from './components/ClientModal'
 import { Grid } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-//Modal.setAppElement("#root");
 import bmApi from './../../../bm-api-config/BmApi'
 
 class TableClient extends React.Component {
@@ -35,23 +33,16 @@ class TableClient extends React.Component {
       
   }
 
-
-  async componentDidMount () {
-    const response = await bmApi.get('/client');
-    console.log(response.data)
-  }
-  /*componentDidMount () {
-    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        console.log(response.data)
-        data.clients.map(v => console.log(v.name))
-        this.setState({ tableData: data.clients });
-        this.setState({ paginationInfo: data.metadata });
+  componentDidMount () {
+    bmApi.get('client?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      data.clients.map(v => console.log(v.name))
+      this.setState({ tableData: data.clients });
+      this.setState({ paginationInfo: data.metadata });
     });
-  }*/
+  }
 
   render () {
     const { tableData } = this.state;
