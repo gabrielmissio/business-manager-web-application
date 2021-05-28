@@ -33,6 +33,7 @@ import TableProcess from './../components/process/ListProcessView/ListProcessVie
 import TableSubprocess from './../components/subprocess/ListSubprocessView/ListSubprocessView'
 import TableClient from './../components/client/ListClientView/ListClientView'
 import TableUser from './../components/user/ListUserView/ListUserView'
+import { Auth } from 'aws-amplify'
 
 import {
   BrowserRouter as Router,
@@ -41,8 +42,11 @@ import {
 
 const drawerWidth = 240;
 
-
-
+function signOut() {
+  Auth.signOut()
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,6 +111,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home() {
+  const [token, setToken] = React.useState(null);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -118,6 +123,15 @@ export default function Home() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  function getToken() {
+    return Auth.currentSession()
+      .then(session => session)
+      .catch(err => console.log(err));
+  }
+
+  getToken().then(userToken => setToken(userToken.accessToken.jwtToken));
+  getToken().then(userToken => console.log(userToken));
 
   return (
     <Router>
@@ -162,8 +176,7 @@ export default function Home() {
               color="primary"
               className={classes.button}
               startIcon={<ExitToAppIcon />}
-              href="https://github.com/gabrielmissio/teste-react"
-              target="_blank"
+              onClick={signOut}
             >
                 Logout
             </Button>

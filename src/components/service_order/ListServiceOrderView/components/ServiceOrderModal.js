@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import ListRegisterView from '../../../register/ListRegisterView/ListRegisterView'
 import Button from '@material-ui/core/Button';
-import SendIcon from '@material-ui/icons/Send';
 import Container from '@material-ui/core/Container';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -12,17 +11,6 @@ import CreateRegisterProcessSubprocessForm from '../../../register/CreateRegiste
 import ClientView from '../../../client/EntityView/ClientView'
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import CommentIcon from '@material-ui/icons/Comment';
 import NearMeIcon from '@material-ui/icons/NearMe';

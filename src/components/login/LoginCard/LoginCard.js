@@ -7,15 +7,15 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import LockIcon from '@material-ui/icons/Lock';
-import { Auth } from 'aws-amplify';
+//import { Auth } from 'aws-amplify';
 
-async function signIn(username, password) {
-    try {
-        const user = await Auth.signIn(username, password);
-    } catch (error) {
-        console.log('error signing in', error);
-    }
-}
+//async function signIn(username, password) {
+//    try {
+//        const user = await Auth.signIn(username, password);
+//    } catch (error) {
+//        console.log('error signing in', error);
+//    }
+//}
 
 class LoginCard extends React.Component {
   
@@ -36,9 +36,9 @@ class LoginCard extends React.Component {
 
     render () {
         const handleSubmit = event => {
-            const username = event.target.user.value
-            const password = event.target.password.value
-            signIn(username, password)
+            //const username = event.target.user.value
+            //const password = event.target.password.value
+            //signIn(username, password)
             event.preventDefault();
         }
         return (

@@ -12,6 +12,7 @@ import { Grid } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 //Modal.setAppElement("#root");
+import bmApi from './../../../bm-api-config/BmApi'
 
 class TableClient extends React.Component {
   
@@ -35,7 +36,11 @@ class TableClient extends React.Component {
   }
 
 
-  componentDidMount () {
+  async componentDidMount () {
+    const response = await bmApi.get('/client');
+    console.log(response.data)
+  }
+  /*componentDidMount () {
     var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage
     axios.get(url, {
         responseType: 'json'
@@ -46,7 +51,7 @@ class TableClient extends React.Component {
         this.setState({ tableData: data.clients });
         this.setState({ paginationInfo: data.metadata });
     });
-  }
+  }*/
 
   render () {
     const { tableData } = this.state;
