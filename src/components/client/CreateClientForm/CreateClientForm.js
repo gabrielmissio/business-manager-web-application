@@ -9,65 +9,61 @@ import SendIcon from '@material-ui/icons/Send';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import bmApi from '../../../bm-api-config/BmApi';
 
-var type = 'NP'
 
-function CreateClientForm() {
 
-    const [value, setValue] = React.useState('NP');
+class CreateClientForm extends React.Component{
+
+  
+  state = {
+    type: 'NP'
+  };
+
+  render () {
 
     const handleChangeRadio = (event) => {
-        setValue(event.target.value);
-        type = event.target.value
+      this.setState({ type: event.target.value})
     };
     const handleSubmit = event => {
         
-        //indentification
-        var name = event.target.name.value
-        var document = event.target.document.value
-        var birthdate = event.target.birthdate.value
-        //address 
-        var country = event.target.country.value
-        var province = event.target.province.value
-        var city = event.target.city.value
-        var zip = event.target.zip.value
-        var street = event.target.street.value
-        var address_number = event.target.address_number.value
-        //contact
-        var email = event.target.email.value
-        var phone1 = event.target.phone1.value
-        var phone2 = event.target.phone2.value
-        
-        event.preventDefault();
+      //indentification
+      var name = event.target.name.value
+      var document = event.target.document.value
+      var birthdate = event.target.birthdate.value
+      //address 
+      var country = event.target.country.value
+      var province = event.target.province.value
+      var city = event.target.city.value
+      var zip = event.target.zip.value
+      var street = event.target.street.value
+      var address_number = event.target.address_number.value
+      //contact
+      var email = event.target.email.value
+      var phone1 = event.target.phone1.value
+      var phone2 = event.target.phone2.value
     
-        var axios = require('axios');
-        var data = JSON.stringify({"name":name, "type":type, "document":document, "birthdate":birthdate, "addresses":[{"country": country, "province": province, "city": city, "zip": zip, "street": street, "address_number": address_number}], "email": email,"phones":[{"phone_number": phone1},{"phone_number": phone2}]});
-        
-        var config = {
-            method: 'post',
-            url: 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client',
-            headers: { 
-                'Authorization': 'Bearer eyJraWQiOiJzbmEyYmFlNGtMbnhpODdPOU5nRDlkd3NzOWRJN2lPNExzQUd3c0lCa1cwPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1NWMyMzQ2NC1mZWIxLTRkOWItYmViOC0yYzQ3YmEwMTFkNDQiLCJjb2duaXRvOmdyb3VwcyI6WyJsdWNraWUtdGVjaCJdLCJldmVudF9pZCI6IjI1MGM5OThhLTIwYTMtNDc0Zi1hNGNmLThjNjQ4N2ZiYThmYiIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE2MTM3NjcxMTIsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX1hwUGtubkpzciIsImV4cCI6MTYxMzc3MDcxMiwiaWF0IjoxNjEzNzY3MTEyLCJqdGkiOiJiMGVjOWE4OC1hZmEzLTQ1MTQtOWEyYS04NjUxYTM5NmZhY2MiLCJjbGllbnRfaWQiOiI3MTNqcGgwZWxnc291ZTltY211M2xnY2o1aSIsInVzZXJuYW1lIjoidGhpYWdvLm0ifQ.LNtqXXWxyIDkQEKktocWTNj-raVOVsbK71m8J4_Ijy06_eD9CzYxqa4S7rhRaew-6Ql5NPH4gIDOfUHtkd42ttCZOuiphk8AtetpLuWuwB_M-3QWo68YWevW-X1hgn_fx9AXt9B8kz2FDbN6g2gylQ8jrEPdaB-tnnR5PkcXTZB7pKLz8moX_qB2Sfe8OTMey6abV1nEzrQ9CqPWPMklrR_CsEa2G4OZZdRO9orPRa9E5tmxXdaSH7hzR6cH6lSe4yb3ACJ-AxLB-ZsUpbkV0oLNmP3sDk3gB_uWO2TYpuZ-7FFqUYqZRzeYW1-SYvL7WCPQJHxQMDXzCA_sG4eqeA', 
-                'Content-Type': 'application/json'
-          },
-          data : data
-        };
-        alert(data)
-        console.log(data)
-        axios(config)
-        .then(function (response) {
-            console.log(JSON.stringify(response.data));
-            alert('Cliente cadastrado com sucesso!')
-        })
-        .catch(function (error) {
-            console.log(error);
-            alert('Erro ao cadastrar cliente!')
-        });
-        
-        }
+      event.preventDefault();
+
+      var data = JSON.stringify({"name":name, "type":this.state.type, "document":document, "birthdate":birthdate, "addresses":[{"country": country, "province": province, "city": city, "zip": zip, "street": street, "address_number": address_number}], "email": email,"phones":[{"phone_number": phone1},{"phone_number": phone2}]});
     
-  return(
-    <Container maxWidth="sm">
+      alert(data)
+      console.log(data)
+      bmApi.post('client', data)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        alert('Cliente cadastrado com sucesso!')
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert('Erro ao cadastrar cliente!')
+      });
+        
+    }
+
+
+    return(
+      <Container maxWidth="sm">
         <form onSubmit={handleSubmit}>
           <Grid container direction="column" justify="space-between" alignItems="flex-start">
             <Grid  container item xs={12} alignItems="flex-start" justify="center">
@@ -99,7 +95,7 @@ function CreateClientForm() {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container item xs={12} >
-                        <RadioGroup row aria-label="gender" name="gender1" value={value} onChange={handleChangeRadio}>
+                        <RadioGroup row aria-label="gender" name="gender1" value={this.state.type} onChange={handleChangeRadio}>
                             <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />
                             <FormControlLabel value="LP" control={<Radio color="primary"/>} label="PJ" />
                         </RadioGroup>       
@@ -173,9 +169,12 @@ function CreateClientForm() {
             
           </Grid>
           
-      </form>        
-    </Container>
+        </form>        
+      </Container>
     )
+    
+  }
+
 }
 
 export default CreateClientForm;
