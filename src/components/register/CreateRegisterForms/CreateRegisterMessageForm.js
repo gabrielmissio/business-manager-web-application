@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
-import axios from 'axios';
+import bmApi from '../../../bm-api-config/BmApi';
 
 
 
@@ -16,10 +16,9 @@ class CreateRegisterMessageForm extends React.Component {
   };
 
   componentDidMount () {
-    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/service-order/'+this.props.serviceOrderId
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
+    
+    bmApi.get('service-order/'+this.props.serviceOrderId)
+    .then(response => {
         var data = response.data
         console.log(response.data)
         this.setState({ service_order: data});
@@ -34,20 +33,9 @@ class CreateRegisterMessageForm extends React.Component {
   
     event.preventDefault();
 
-    var axios = require('axios');
     var data = JSON.stringify({"is_open": this.props.keepOpenServiceOrder, "is_changed": this.props.is_changed, "user_id": user_id, "process_id": this.state.service_order.current_process.id, "subprocess_id": this.state.service_order.current_subprocess.id, "service_order_id": this.state.service_order.id, "title": this.props.messageTitle, "message": message});
 
-    var config = {
-      method: 'post',
-      url: 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/register',
-      headers: { 
-        'Authorization': 'Bearer', 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-    alert(data)
-    axios(config)
+    bmApi.post('register', data)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
       alert('Registro adicionado com sucesso!')
