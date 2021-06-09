@@ -11,6 +11,8 @@ import ProcessModal from './components/ProcessModal'
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Grid } from '@material-ui/core';
+import bmApi from './../../../bm-api-config/BmApi'
+
 
 class TableProcess extends React.Component {
   
@@ -35,15 +37,13 @@ class TableProcess extends React.Component {
 
 
   componentDidMount () {
-    var url = 'https://t08w33898k.execute-api.us-east-1.amazonaws.com/hml/patient'//process?page=+this.state.page+'&paginate_by='+this.state.rowsPerPage
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        console.log(response.data)
-        data.process.map(v => console.log(v.name))
-        this.setState({ tableData: data.process });
-        this.setState({ paginationInfo: data.metadata });
+    bmApi.get('process?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      data.process.map(v => console.log(v.name))
+      this.setState({ tableData: data.process });
+      this.setState({ paginationInfo: data.metadata });
     });
   }
 

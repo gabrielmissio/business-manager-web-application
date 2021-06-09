@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from 'react-select';
+import bmApi from './../../../../bm-api-config/BmApi'
+
 
 class ProcessModal extends React.Component {
 
@@ -22,25 +23,21 @@ class ProcessModal extends React.Component {
     
   }
   componentDidMount() {
-    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process/'+this.props.processId
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        console.log(response.data)
-        this.setState({process: data});
+    bmApi.get('process/'+this.props.processId)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      this.setState({process: data});
     });
-    url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/subprocess'
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        const options = data.subprocess.map(d => ({
-          "value" : d.id,
-          "label" : d.name
-        }))
-        //options.map((v) => {console.log(v)})
-        this.setState({subprocess: options});
+    bmApi.get('subprocess')
+    .then(response => {
+      var data = response.data
+      const options = data.subprocess.map(d => ({
+        "value" : d.id,
+        "label" : d.name
+      }))
+      //options.map((v) => {console.log(v)})
+      this.setState({subprocess: options});
     });
   
   }
