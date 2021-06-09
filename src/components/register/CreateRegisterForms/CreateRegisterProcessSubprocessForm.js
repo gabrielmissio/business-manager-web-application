@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Select from 'react-select';
-import axios from 'axios';
+import bmApi from '../../../bm-api-config/BmApi';
 
 class CreateRegisterProcessSubprocessForm extends React.Component {
 
@@ -23,19 +23,15 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
 
   componentDidMount () {
     //load current service order informations
-    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/service-order/'+this.props.serviceOrderId
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        console.log(response.data)
-        this.setState({ service_order: data}, () => set_current_process_subprocess(), loadProcessOptions());
+    bmApi.get('service-order/'+this.props.serviceOrderId)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      this.setState({ service_order: data}, () => set_current_process_subprocess(), loadProcessOptions());
     });
     const loadProcessOptions = () => {
-      var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process'
-      axios.get(url, {
-          responseType: 'json'
-      }).then(response => {
+      bmApi.get('process') 
+      .then(response => {
           var data = response.data
           const options = data.process.map(d => ({
             "value" : d.id,
@@ -45,10 +41,8 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
       });
     }
     const loadSubprocessOptions = () => {
-      var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process/'+this.state.service_order.current_process.id
-      axios.get(url, {
-          responseType: 'json'
-      }).then(response => {
+      bmApi.get('process/'+this.state.service_order.current_process.id)
+      .then(response => {
           var data = response.data
           const options = data.subprocess.map(d => ({
             "value" : d.id,
@@ -78,10 +72,8 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
     }
 
     const loadSubprocessOptions = () => {
-      var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/process/'+this.state.selectedProcessId
-      axios.get(url, {
-          responseType: 'json'
-      }).then(response => {
+      bmApi.get('process/'+this.state.selectedProcessId)
+      .then(response => {
           var data = response.data
           const options = data.subprocess.map(d => ({
             "value" : d.id,
@@ -97,19 +89,10 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
   
       event.preventDefault();
   
-      var axios = require('axios');
       var data = JSON.stringify({"is_changed": true, "user_id": user_id, "process_id": this.state.selectedProcessId, "subprocess_id": this.state.selectedSubprocessId, "service_order_id": this.props.serviceOrderId, "title": this.props.messageTitle, "message": message});
-      var config = {
-        method: 'post',
-        url: 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/register',
-        headers: { 
-          'Authorization': 'Bearer', 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
+      
       alert(data)
-      axios(config)
+      bmApi.post('register', data)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         alert('Registro adicionado com sucesso!')

@@ -132,7 +132,7 @@ export default function Home() {
 
   getToken().then(userToken => setToken(userToken.accessToken.jwtToken));
   window.sessionStorage.setItem("token", token);
-
+  console.log(token)
 
   return (
     <Router>
