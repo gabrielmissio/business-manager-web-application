@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import ReactDOM from 'react-dom';
 import MaterialTable, { MTableBodyRow } from "material-table";
 import Dialog from '@material-ui/core/Dialog';
@@ -11,7 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Grid } from '@material-ui/core';
-//Modal.setAppElement("#root");
+import bmApi from './../../../bm-api-config/BmApi'
 
 class TableRegister extends React.Component {
   
@@ -19,32 +18,30 @@ class TableRegister extends React.Component {
       super();
 
       this.state = {
-          tableData: [{
-              
-          }],
-          paginationInfo: [{
+        tableData: [{
+            
+        }],
+        paginationInfo: [{
 
-          }],
-          page: 0,
-          rowsPerPage: 10,
-          modalIsOpen: false,
-          serviceOrderId: 0,
-          clientName: ''
+        }],
+        page: 0,
+        rowsPerPage: 10,
+        modalIsOpen: false,
+        serviceOrderId: 0,
+        clientName: ''
       };
       
   }
 
 
   componentDidMount () {
-    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/service-order?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        console.log(response.data)
-        data.service_orders.map(v => console.log(v.current_process.name))
-        this.setState({ tableData: data.service_orders });
-        this.setState({ paginationInfo: data.metadata });
+    bmApi.get('service-order?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      data.service_orders.map(v => console.log(v.current_process.name))
+      this.setState({ tableData: data.service_orders });
+      this.setState({ paginationInfo: data.metadata });
     });
   }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import ReactDOM from 'react-dom';
 import MaterialTable, { MTableBodyRow } from "material-table";
 import Dialog from '@material-ui/core/Dialog';
@@ -11,39 +10,39 @@ import UserModal from './components/UserModal'
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Grid } from '@material-ui/core';
+import bmApi from './../../../bm-api-config/BmApi'
 
 class TableUser extends React.Component {
   
   constructor () {
-      super();
+    super();
 
-      this.state = {
-          tableData: [{
-              
-          }],
-          paginationInfo: [{
+    this.state = {
+      tableData: [{
+          
+      }],
+      paginationInfo: [{
 
-          }],
-          page: 0,
-          rowsPerPage: 10,
-          modalIsOpen: false,
-          userId: 0,
-          userName: ''
-      };
+      }],
+      page: 0,
+      rowsPerPage: 10,
+      modalIsOpen: false,
+      userId: 0,
+      userName: ''
+    };
       
   }
 
 
   componentDidMount () {
-    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/user?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        console.log(response.data)
-        data.users.map(v => console.log(v.name))
-        this.setState({ tableData: data.users });
-        this.setState({ paginationInfo: data.metadata });
+    
+    bmApi.get('user?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      data.users.map(v => console.log(v.name))
+      this.setState({ tableData: data.users });
+      this.setState({ paginationInfo: data.metadata });
     });
   }
 

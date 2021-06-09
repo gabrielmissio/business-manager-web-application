@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import ReactDOM from 'react-dom';
 import MaterialTable, { MTableBodyRow } from "material-table";
 import { Button } from '@material-ui/core';
@@ -13,40 +12,40 @@ import SubprocessModal from './components/SubprocessModal'
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Grid } from '@material-ui/core';
+import bmApi from './../../../bm-api-config/BmApi'
 
 class TableSubprocess extends React.Component {
   
   constructor () {
-      super();
+    super();
 
-      this.state = {
-          tableData: [{
-              
-          }],
-          paginationInfo: [{
+    this.state = {
+      tableData: [{
+          
+      }],
+      paginationInfo: [{
 
-          }],
-          page: 0,
-          rowsPerPage: 10,
-          modalIsOpen: false,
-          subprocessId: 0,
-          subprocessName: ''
-      };
+      }],
+      page: 0,
+      rowsPerPage: 10,
+      modalIsOpen: false,
+      subprocessId: 0,
+      subprocessName: ''
+    };
       
   }
 
-
   componentDidMount () {
-    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/subprocess?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        console.log(response.data)
-        data.subprocess.map(v => console.log(v.name))
-        this.setState({ tableData: data.subprocess });
-        this.setState({ paginationInfo: data.metadata });
+  
+    bmApi.get('subprocess?page='+this.state.page+'&paginate_by='+this.state.rowsPerPage)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      data.subprocess.map(v => console.log(v.name))
+      this.setState({ tableData: data.subprocess });
+      this.setState({ paginationInfo: data.metadata });
     });
+
   }
 
   render () {

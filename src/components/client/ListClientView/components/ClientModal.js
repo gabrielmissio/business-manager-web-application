@@ -9,29 +9,27 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Checkbox from '@material-ui/core/Checkbox';
-import axios from 'axios';
+import bmApi from './../../../../bm-api-config/BmApi';
+
 
 class ClientView extends React.Component {
 
-    state = {
-        client: false,
-        service_order: [],
-        isEditable: true
-    };
+  state = {
+    client: false,
+    service_order: [],
+    isEditable: true
+  };
 
-    componentDidMount() {
-
-      var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client/'+this.props.clientId
-      axios.get(url, {
-          responseType: 'json'
-      }).then(response => {
-          var data = response.data
-          console.log(response.data)      
-          this.setState({ client: data});
-      });
-  
+  componentDidMount() {
+      
+    bmApi.get('client/'+this.props.clientId)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)      
+      this.setState({ client: data});
+    });
         
-    }
+  }
 
     render() {
         return (

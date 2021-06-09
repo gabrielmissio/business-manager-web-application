@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Container from '@material-ui/core/Container';
 import Checkbox from '@material-ui/core/Checkbox';
-import axios from 'axios';
+import bmApi from './../../../../bm-api-config/BmApi'
 
 
 class SubprocessModal extends Component {
@@ -23,13 +23,11 @@ class SubprocessModal extends Component {
   }
 
   componentDidMount() {
-    var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/user/'+this.props.userId
-    axios.get(url, {
-        responseType: 'json'
-    }).then(response => {
-        var data = response.data
-        console.log(response.data)
-        this.setState({ user: data});
+    bmApi.get('user/'+this.props.userId)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      this.setState({ user: data});
     });  
   }
 

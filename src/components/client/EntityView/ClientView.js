@@ -9,7 +9,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Checkbox from '@material-ui/core/Checkbox';
-import axios from 'axios';
+import bmApi from './../../../bm-api-config/BmApi'
+
 
 class ClientView extends React.Component {
 
@@ -19,27 +20,24 @@ class ClientView extends React.Component {
         isEditable: true
     };
 
-    componentDidMount() {
-        var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/service-order/'+this.props.serviceOrderId
-        axios.get(url, {
-            responseType: 'json'
-        }).then(response => {
-            var data = response.data
-            console.log(response.data)
-            this.setState({ service_order: data}, () => loadClientInformation());
-        });
-        const loadClientInformation = () => {
-            var url = 'https://ii9ik5bym6.execute-api.us-east-1.amazonaws.com/dev/client/'+this.state.service_order.client.id
-            axios.get(url, {
-                responseType: 'json'
-            }).then(response => {
-                var data = response.data
-                console.log(response.data)      
-                this.setState({ client: data});
-            });
-        }
-        
+  componentDidMount() {
+
+    bmApi.get('service-order/'+this.props.serviceOrderId)
+    .then(response => {
+      var data = response.data
+      console.log(response.data)
+      this.setState({ service_order: data}, () => loadClientInformation());
+    });
+    const loadClientInformation = () => {
+      bmApi.get('client/'+this.state.service_order.client.id)
+      .then(response => {
+        var data = response.data
+        console.log(response.data)      
+        this.setState({ client: data});
+      });
     }
+        
+  }
 
     render() {
         return (
