@@ -26,7 +26,7 @@ class CreateUserForm extends React.Component{
         "label" : d.name
       }))
       this.setState({ permissions: options});
-  });
+    });
     
   }
 
