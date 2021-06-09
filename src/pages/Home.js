@@ -131,7 +131,8 @@ export default function Home() {
   }
 
   getToken().then(userToken => setToken(userToken.accessToken.jwtToken));
-  getToken().then(userToken => console.log(userToken));
+  window.sessionStorage.setItem("token", token);
+
 
   return (
     <Router>

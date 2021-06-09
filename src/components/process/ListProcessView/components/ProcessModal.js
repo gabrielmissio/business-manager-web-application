@@ -39,7 +39,7 @@ class ProcessModal extends React.Component {
           "value" : d.id,
           "label" : d.name
         }))
-        options.map((v) => {console.log(v)})
+        //options.map((v) => {console.log(v)})
         this.setState({subprocess: options});
     });
   
