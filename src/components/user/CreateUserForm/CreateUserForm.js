@@ -8,6 +8,35 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import Select from 'react-select';
 import bmApi from '../../../bm-api-config/BmApi';
+import { Auth } from 'aws-amplify';
+
+async function signUp(username, password, email, phone_number, data) {
+    try {
+        const { user } = await Auth.signUp({
+            username,
+            password,
+            attributes: {
+                email,          // optional
+                phone_number,   // optional - E.164 number convention
+                // other custom attributes 
+            }
+        });
+        console.log(user);
+        bmApi.post('user', data)
+        .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        alert('Usuario cadastrado com sucesso!')
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert('Erro ao cadastrar usuario!')
+      });
+        alert(user)
+    } catch (error) {
+        console.log('error signing up:', error);
+        alert('error signing up: Verificaque o log do console para mais informações')
+    }
+}
 
 
 class CreateUserForm extends React.Component{
@@ -41,22 +70,18 @@ class CreateUserForm extends React.Component{
     const handleSubmit = event => {
       
       var name = event.target.name.value
-      var user_name = event.target.user_name.value
+      var userName = event.target.userName.value
       var email = event.target.email.value
+      var password = event.target.password.value
+      var confirmPassword = event.target.passwordConfirm.value
+      var phone = event.target.phone.value
       
       event.preventDefault();
   
-      var data = JSON.stringify({"name":name, "user_name": user_name, "email": email, "function": 123});
-      alert(data)
-      bmApi.post('user', data)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        alert('Usuario cadastrado com sucesso!')
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert('Erro ao cadastrar usuario!')
-      });
+      var data = JSON.stringify({"name":name, "user_name": userName, "password": password, "phone": phone, "email": email, "function": 123});
+      console.log(data)
+      signUp(userName, password, email, phone, data)
+      
       
     }
 
@@ -86,11 +111,21 @@ class CreateUserForm extends React.Component{
                     <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="user_name" label="Nome de usuario"/>
+                    <TextField size="small" fullWidth variant="outlined"  name="userName" label="Nome de usuario"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" fullWidth variant="outlined"  name="password" label="Senha" type="password"/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" fullWidth variant="outlined"  name="passwordConfirm" label="Cofirmação Senha" type="password"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField size="small" fullWidth variant="outlined"  name="email" label="Email"/>
                 </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField size="small" fullWidth variant="outlined"  name="phone" label="Phone"/>
+                </Grid>
+                
             </Grid>
             <br/>
             <Grid container xs={12}>
