@@ -111,7 +111,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home() {
-  const [token, setToken] = React.useState(null);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -123,16 +122,6 @@ export default function Home() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  function getToken() {
-    return Auth.currentSession()
-      .then(session => session)
-      .catch(err => console.log(err));
-  }
-
-  getToken().then(userToken => setToken(userToken.accessToken.jwtToken));
-  window.sessionStorage.setItem("token", token);
-  console.log(token)
 
   return (
     <Router>

@@ -18,6 +18,8 @@ export default function Login() {
     event.preventDefault();
     let response = await Auth.signIn(user, password)
     console.log('auth response', response)
+    //console.log('test jwt', response.signInUserSession.accessToken.jwtToken)
+    window.sessionStorage.setItem("token", response.signInUserSession.accessToken.jwtToken);
   }
 
   return(
