@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import Login from './pages/Login'
 import {
   BrowserRouter as Router,
   Switch, Route
 } from "react-router-dom";
-import Amplify from 'aws-amplify';
+import Amplify, { Hub } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 
 Amplify.configure({
@@ -18,20 +18,34 @@ Amplify.configure({
   }
 });
 
-class App extends React.Component {
-  
-  render(){
-    return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home}/> 
-          <Route exact path="/login" component={Login}/> 
-          <Route exact path="/*" component={Home}/>
-        </Switch>  
-      </Router>
-    )
-  }
+function App() {
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffect(() => {
+    Hub.listen('auth', (event) => {
+       console.log('auth event', event);
+       setCurrentUser(event.payload.data)
+    })
+  })
+
+
+  return (
+    <div>
+    {
+    currentUser ? 
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home}/>  
+        <Route exact path="/*" component={Home}/>
+      </Switch>  
+    </Router> 
+    : 
+    <Login/>}
+    
+    </div>
+  )
+
   
 }
 
-export default withAuthenticator(App);
+export default App;
