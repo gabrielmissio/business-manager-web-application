@@ -12,17 +12,17 @@ import { Auth } from 'aws-amplify';
 
 async function signUp(username, password, email, phone_number, data) {
     try {
-        const { user } = await Auth.signUp({
-            username,
-            password,
-            attributes: {
-                email,          // optional
-                phone_number,   // optional - E.164 number convention
-                // other custom attributes 
-            }
-        });
-        console.log(user);
-        bmApi.post('user', data)
+      const { user } = await Auth.signUp({
+          username,
+          password,
+          attributes: {
+              email,          // optional
+              phone_number,   // optional - E.164 number convention
+              // other custom attributes 
+          }
+      });
+      console.log(user);
+      bmApi.post('user', data)
         .then(function (response) {
         console.log(JSON.stringify(response.data));
         alert('Usuario cadastrado com sucesso!')
@@ -31,7 +31,6 @@ async function signUp(username, password, email, phone_number, data) {
         console.log(error);
         alert('Erro ao cadastrar usuario!')
       });
-        alert(user)
     } catch (error) {
         console.log('error signing up:', error);
         alert('error signing up: Verificaque o log do console para mais informações')
