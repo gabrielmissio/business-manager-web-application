@@ -20,11 +20,17 @@ Amplify.configure({
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
-
+  console.log('Teste>>>>>>>>>>>', window.sessionStorage.getItem("auth"))
   useEffect(() => {
     Hub.listen('auth', (event) => {
        console.log('auth event', event);
-       setCurrentUser(event.payload.data)
+       if (event.payload.event === 'signIn') {
+        setCurrentUser(event.payload.data)
+        window.sessionStorage.setItem("auth", true);
+        window.location.reload();
+       }else if (event.payload.event === 'signIn_failure'){
+         alert('usuario e/ou senha incorreto(s)')
+       }
     })
   })
 
@@ -32,7 +38,7 @@ function App() {
   return (
     <div>
     {
-    currentUser ? 
+    currentUser || window.sessionStorage.getItem("auth") ? 
     <Router>
       <Switch>
         <Route exact path="/" component={Home}/>  

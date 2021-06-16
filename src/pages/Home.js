@@ -46,6 +46,11 @@ function signOut() {
   Auth.signOut()
     .then(data => console.log(data))
     .catch(err => console.log(err))
+
+    window.sessionStorage.setItem("token", '');
+    window.sessionStorage.setItem("currentUser", '');
+    window.sessionStorage.setItem("auth", '');
+    window.location.reload();
 }
 
 const useStyles = makeStyles((theme) => ({
