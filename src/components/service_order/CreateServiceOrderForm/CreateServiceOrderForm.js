@@ -88,7 +88,7 @@ class CreateServiceOrderForm extends React.Component {
 
             event.preventDefault();
         
-            var data = JSON.stringify({"client_id": this.state.selectedClientId, "current_process_id": this.state.selectedProcessId, "current_subprocess_id": this.state.selectedSubprocessId, "user_id": 1});
+            var data = JSON.stringify({"client_id": this.state.selectedClientId, "current_process_id": this.state.selectedProcessId, "current_subprocess_id": this.state.selectedSubprocessId, "user_id": window.sessionStorage.getItem('currentUser')});
             
             
             alert(data)

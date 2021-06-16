@@ -10,33 +10,6 @@ import Select from 'react-select';
 import bmApi from '../../../bm-api-config/BmApi';
 import { Auth } from 'aws-amplify';
 
-async function signUp(username, password, email, phone_number, data) {
-    try {
-      const { user } = await Auth.signUp({
-          username,
-          password,
-          attributes: {
-              email,          // optional
-              phone_number,   // optional - E.164 number convention
-              // other custom attributes 
-          }
-      });
-      console.log(user);
-      bmApi.post('user', data)
-        .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        alert('Usuario cadastrado com sucesso!')
-      })
-      .catch(function (error) {
-        console.log(error);
-        alert('Erro ao cadastrar usuario!')
-      });
-    } catch (error) {
-        console.log('error signing up:', error);
-        alert('error signing up: Verificaque o log do console para mais informações')
-    }
-}
-
 
 class CreateUserForm extends React.Component{
   
@@ -77,9 +50,18 @@ class CreateUserForm extends React.Component{
       
       event.preventDefault();
   
-      var data = JSON.stringify({"name":name, "user_name": userName, "password": password, "phone": phone, "email": email, "function": 123});
+      var data = JSON.stringify({"name":name, "user_name": userName, "password": password, "phone": phone, "email": email, "function": 123, id: "idfodao132"});
       console.log(data)
-      signUp(userName, password, email, phone, data)
+      bmApi.post('user', data)
+        .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        alert('Usuario cadastrado com sucesso!')
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert('Erro ao cadastrar usuario!')
+      });
+      //signUp(userName, password, email, phone, data)
       
       
     }

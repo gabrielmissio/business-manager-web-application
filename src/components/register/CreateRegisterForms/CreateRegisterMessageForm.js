@@ -29,7 +29,7 @@ class CreateRegisterMessageForm extends React.Component {
     
     const handleSubmit = event => {        
     var message = event.target.message.value
-    var user_id = 1
+    var user_id = window.sessionStorage.getItem('currentUser')
   
     event.preventDefault();
 

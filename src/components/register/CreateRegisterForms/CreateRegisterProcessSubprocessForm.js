@@ -85,7 +85,7 @@ class CreateRegisterProcessSubprocessForm extends React.Component {
 
     const handleSubmit = event => {  
       var message = 'Iniciado subprocesso ' + this.state.selectedSubprocessName + ' no processo ' + this.state.selectedProcessName + '\n\n\n <br/>' + event.target.message.value
-      var user_id = 1
+      var user_id = window.sessionStorage.getItem('currentUser')
   
       event.preventDefault();
   

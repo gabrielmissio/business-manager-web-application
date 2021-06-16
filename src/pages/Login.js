@@ -20,6 +20,7 @@ export default function Login() {
     console.log('auth response', response)
     //console.log('test jwt', response.signInUserSession.accessToken.jwtToken)
     window.sessionStorage.setItem("token", response.signInUserSession.accessToken.jwtToken);
+    window.sessionStorage.setItem("currentUser", response.attributes.sub);
   }
 
   return(
