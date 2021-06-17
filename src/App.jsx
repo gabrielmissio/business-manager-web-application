@@ -19,7 +19,6 @@ Amplify.configure({
 
 function App() {
   const [currentUser, setCurrentUser] = useState();
-  console.log('Teste>>>>>>>>>>>', window.sessionStorage.getItem("auth"))
   useEffect(() => {
     Hub.listen('auth', (event) => {
        console.log('auth event', event);

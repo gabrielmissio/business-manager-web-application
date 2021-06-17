@@ -34,6 +34,12 @@ import TableSubprocess from './../components/subprocess/ListSubprocessView/ListS
 import TableClient from './../components/client/ListClientView/ListClientView'
 import TableUser from './../components/user/ListUserView/ListUserView'
 import { Auth } from 'aws-amplify'
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import CloseIcon from '@material-ui/icons/Close';
+import ChangePasswordForm from './../components/profile/ChangePasswordForm'
+
 
 import {
   BrowserRouter as Router,
@@ -119,6 +125,7 @@ export default function Home() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [modalProfile, setModalProfile] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -129,102 +136,118 @@ export default function Home() {
   };
 
   return (
-    <Router>
-      <div className={classes.root} >
-      <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
-        > 
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-          <Grid container direction="row" justify="flex-start" xs={6}>
-            <Typography variant="h6" noWrap>
-              <Link href="/"  color="inherit" >
-                {'Business Manager'}
-              </Link>
-            </Typography>
-          </Grid>
-          <Grid container direction="row" justify="flex-end" xs={8} >
-            <Button
-              disableElevation
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              startIcon={<AccountCircle />}
-            >
-              Profile
-            </Button>
-            <Button
-              disableElevation
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              startIcon={<ExitToAppIcon />}
-              onClick={signOut}
-            >
-                Logout
-            </Button>
-
-          </Grid>
-            
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-          </div>
-          <Divider />
-          <ItensDrawer/>
-        </Drawer>
-        <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open,
-          })}
-        > 
-        <div className={classes.drawerHeader} />
-        <Paper style={{ padding: 26, minHeight: '80.8vh'}} elevation={3} >
-          <Switch>
-            <Route exact path="/" component={WorkflowDashboard}/>
-            <Route exact path="/usuario/cadastrar" component={CreateUserForm}/>
-            <Route exact path="/usuario/gerenciar" component={TableUser}/>
-            <Route exact path="/cliente/cadastrar" component={CreateClientForm}/>
-            <Route exact path="/cliente/gerenciar" component={TableClient}/>
-            <Route exact path="/processo/cadastrar" component={CreateProcessForm}/>
-            <Route exact path="/processo/gerenciar" component={TableProcess}/>
-            <Route exact path="/subprocesso/cadastrar" component={CreateSubprocessForm}/>
-            <Route exact path="/subprocesso/gerenciar" component={TableSubprocess}/>
-            <Route exact path="/ordem-de-servico/cadastrar" component={CreateServiceOrderForm}/>
-            <Route exact path="/adicionar-registro/mensagem" component={CreateRegisterMessageForm}/>
-            <Route exact path="/adicionar-registro/alterar-processo-subprocesso" component={CreateRegisterProcessSubprocessForm}/>
-            <Route exact path="/ordem-de-servico/gerenciar" component={ManagerServiceOrder}/>
-            <Route exact path="/ordem-de-servico/registro" component={ListRegisterView}/> 
-            <Route exact path="/*" component={NotFound}/>
-          </Switch>
-        </Paper>
-        </main>
-      </div>
-    </Router>
+    <div>
+      <Router>
+        <div className={classes.root} >
+        <CssBaseline />
+          <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: open,
+            })}
+          > 
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, open && classes.hide)}
+              >
+                <MenuIcon />
+              </IconButton>
+            <Grid container direction="row" justify="flex-start" xs={6}>
+              <Typography variant="h6" noWrap>
+                <Link href="/"  color="inherit" >
+                  {'Business Manager'}
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid container direction="row" justify="flex-end" xs={8} >
+              <Button
+                disableElevation
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                startIcon={<AccountCircle />}
+                onClick={()=>{setModalProfile(true)}}
+              >
+                Profile
+              </Button>
+              <Button
+                disableElevation
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                startIcon={<ExitToAppIcon />}
+                onClick={signOut}
+              >
+                  Logout
+              </Button>
+          
+            </Grid>
+              
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+              </IconButton>
+            </div>
+            <Divider />
+            <ItensDrawer/>
+          </Drawer>
+          <main
+            className={clsx(classes.content, {
+              [classes.contentShift]: open,
+            })}
+          > 
+          <div className={classes.drawerHeader} />
+          <Paper style={{ padding: 26, minHeight: '80.8vh'}} elevation={3} >
+            <Switch>
+              <Route exact path="/" component={WorkflowDashboard}/>
+              <Route exact path="/usuario/cadastrar" component={CreateUserForm}/>
+              <Route exact path="/usuario/gerenciar" component={TableUser}/>
+              <Route exact path="/cliente/cadastrar" component={CreateClientForm}/>
+              <Route exact path="/cliente/gerenciar" component={TableClient}/>
+              <Route exact path="/processo/cadastrar" component={CreateProcessForm}/>
+              <Route exact path="/processo/gerenciar" component={TableProcess}/>
+              <Route exact path="/subprocesso/cadastrar" component={CreateSubprocessForm}/>
+              <Route exact path="/subprocesso/gerenciar" component={TableSubprocess}/>
+              <Route exact path="/ordem-de-servico/cadastrar" component={CreateServiceOrderForm}/>
+              <Route exact path="/adicionar-registro/mensagem" component={CreateRegisterMessageForm}/>
+              <Route exact path="/adicionar-registro/alterar-processo-subprocesso" component={CreateRegisterProcessSubprocessForm}/>
+              <Route exact path="/ordem-de-servico/gerenciar" component={ManagerServiceOrder}/>
+              <Route exact path="/ordem-de-servico/registro" component={ListRegisterView}/> 
+              <Route exact path="/*" component={NotFound}/>
+            </Switch>
+          </Paper>
+          </main>
+        </div>
+      </Router>
+      <Dialog  fullWidth={true} maxWidth={'sm'} aria-labelledby="max-width-dialog-title" open={modalProfile}>
+        <Grid container justify="space-between" maxWidth={'md'} style={{backgroundColor: '#3f51b5', color:'#fff'}}>
+          <DialogTitle id="customized-dialog-title">
+            {window.sessionStorage.getItem("currentUserName")}
+          </DialogTitle>
+          <IconButton aria-label="close" onClick={()=>{setModalProfile(false)}}>
+            <CloseIcon fontSize='large' style={{ color: '#fff' }}/>
+          </IconButton>
+        </Grid>
+        <DialogContent dividers>
+          <ChangePasswordForm/>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 }
 
