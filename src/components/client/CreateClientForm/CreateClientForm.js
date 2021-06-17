@@ -84,16 +84,16 @@ class CreateClientForm extends React.Component{
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                     <TextField size="small" fullWidth variant="outlined"  name="name" label="Name"/>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}> 
                     <TextField size="small" fullWidth variant="outlined"  name="document" label="Documento"/>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                     <TextField size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento"/>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                     <Grid container item xs={12} >
                         <RadioGroup row aria-label="gender" name="gender1" value={this.state.type} onChange={handleChangeRadio}>
                             <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />

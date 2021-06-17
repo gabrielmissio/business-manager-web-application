@@ -6,7 +6,6 @@ import {
   Switch, Route
 } from "react-router-dom";
 import Amplify, { Hub } from 'aws-amplify';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 
 Amplify.configure({
   Auth: {
