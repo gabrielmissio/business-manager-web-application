@@ -16,20 +16,6 @@ class CreateSubprocessForm extends React.Component{
 
   render () {
 
-
-    /*
-    const validate = (text) => {
-      console.log(text);
-      let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-      if (reg.test(text) === false) {
-        console.log("Email is Not Correct");
-        return false;
-      }
-      else {
-        console.log("Email is Correct");
-      }
-    }*/
-
     const handleSubmit = event => {
       var name = event.target.name.value
       var limit_time = event.target.limit_time.value

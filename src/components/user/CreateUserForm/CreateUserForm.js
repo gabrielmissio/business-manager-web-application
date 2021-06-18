@@ -14,6 +14,9 @@ class CreateUserForm extends React.Component{
   
   state = {
     permissions: [],
+    email: false,
+    name: false,
+    username: false
   };
 
   componentDidMount () {
@@ -32,6 +35,17 @@ class CreateUserForm extends React.Component{
 
   render () {
 
+    const emailValidate = (text) => {
+      console.log(text);
+      let reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w\w+)+$/;
+      if (reg.test(text)) {
+        this.setState({ email: false});
+      }
+      else {
+        this.setState({ email: true});
+      }
+    }
+
     const handleChangeCombo = (e) => {
       //var a = {value:e}
       //var b = a.value
@@ -46,9 +60,11 @@ class CreateUserForm extends React.Component{
       //var phone = event.target.phone.value
       
       event.preventDefault();
-  
+      emailValidate(email)
+
       var data = JSON.stringify({"name":name, "user_name": userName, "email": email, "function": 123});
       console.log(data)
+      
       bmApi.post('user', data)
         .then(function (response) {
         console.log(JSON.stringify(response.data));
@@ -75,22 +91,44 @@ class CreateUserForm extends React.Component{
             <br/>
             <br/>
             <Grid container xs={12}>
-                <Typography color="primary" variant="h6" component="h2" >
-                    Identificação
-                    <hr/>
-                </Typography>
-
+              <Typography color="primary" variant="h6" component="h2" >
+                Identificação
+                <hr/>
+              </Typography>
             </Grid>
             <br/>
             <Grid container spacing={4}>
               <Grid item xs={12} sm={6}>
-                  <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome"/>
+                <TextField 
+                  size="small" 
+                  fullWidth 
+                  variant="outlined"  
+                  name="name" 
+                  label="Nome"
+                  required
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
-                  <TextField size="small" fullWidth variant="outlined"  name="userName" label="Nome de usuario"/>
+                <TextField 
+                  size="small" 
+                  fullWidth 
+                  variant="outlined"  
+                  name="userName"
+                  label="Nome de usuario"
+                  required
+                />
               </Grid>
               <Grid item xs={12} sm={6}>
-                  <TextField size="small" fullWidth variant="outlined"  name="email" label="Email"/>
+                <TextField 
+                  size="small" 
+                  fullWidth 
+                  variant="outlined"  
+                  name="email" 
+                  label="Email"
+                  required
+                  error={this.state.email}
+                  helperText={this.state.email ? 'Formato de email invalido!' : ' '}
+                />
               </Grid>
             </Grid>
             <br/>
