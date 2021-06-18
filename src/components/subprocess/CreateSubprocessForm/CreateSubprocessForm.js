@@ -16,6 +16,20 @@ class CreateSubprocessForm extends React.Component{
 
   render () {
 
+
+    /*
+    const validate = (text) => {
+      console.log(text);
+      let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+      if (reg.test(text) === false) {
+        console.log("Email is Not Correct");
+        return false;
+      }
+      else {
+        console.log("Email is Correct");
+      }
+    }*/
+
     const handleSubmit = event => {
       var name = event.target.name.value
       var limit_time = event.target.limit_time.value
@@ -62,7 +76,7 @@ class CreateSubprocessForm extends React.Component{
                     <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome" />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="limit_time" label="Tempo Limite" />
+                    <TextField size="small" fullWidth variant="outlined"  name="limit_time" label="Tempo Limite" helperText="Em horas" />
                 </Grid>
             </Grid>
             <br/>

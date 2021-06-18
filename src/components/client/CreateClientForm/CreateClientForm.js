@@ -91,7 +91,7 @@ class CreateClientForm extends React.Component{
                     <TextField size="small" fullWidth variant="outlined"  name="document" label="Documento"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento"/>
+                    <TextField size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento" helperText="AAAA-MM-DD"/>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Grid container item xs={12} >
