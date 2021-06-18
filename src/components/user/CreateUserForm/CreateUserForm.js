@@ -43,11 +43,11 @@ class CreateUserForm extends React.Component{
       var name = event.target.name.value
       var userName = event.target.userName.value
       var email = event.target.email.value
-      var phone = event.target.phone.value
+      //var phone = event.target.phone.value
       
       event.preventDefault();
   
-      var data = JSON.stringify({"name":name, "user_name": userName, "phone": phone, "email": email, "function": 123, id: "idfodao132"});
+      var data = JSON.stringify({"name":name, "user_name": userName, "email": email, "function": 123});
       console.log(data)
       bmApi.post('user', data)
         .then(function (response) {
@@ -57,9 +57,7 @@ class CreateUserForm extends React.Component{
       .catch(function (error) {
         console.log(error);
         alert('Erro ao cadastrar usuario!')
-      });
-      //signUp(userName, password, email, phone, data)
-      
+      });      
       
     }
 
@@ -85,19 +83,15 @@ class CreateUserForm extends React.Component{
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="userName" label="Nome de usuario"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="email" label="Email"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="phone" label="Phone"/>
-                </Grid>
-                
+              <Grid item xs={12} sm={6}>
+                  <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome"/>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                  <TextField size="small" fullWidth variant="outlined"  name="userName" label="Nome de usuario"/>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                  <TextField size="small" fullWidth variant="outlined"  name="email" label="Email"/>
+              </Grid>
             </Grid>
             <br/>
             <Grid container xs={12}>

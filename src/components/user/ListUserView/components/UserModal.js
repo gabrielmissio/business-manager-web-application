@@ -32,95 +32,119 @@ class SubprocessModal extends Component {
   }
 
   render() {
-      return (
-        <div>
-            {
-              this.state.user ?
-                <Container maxWidth="sm">
-                <form >
-                  <Grid container direction="column" justify="space-between" alignItems="flex-start">
-                    <Grid container xs={12}>
-                      <Checkbox
-                        checked={!this.state.isEditable}
-                        onChange={() => {this.setState({ isEditable: !this.state.isEditable})}}
-                        name="checkedF"
-                        defaultChecked
-                        color="primary"
-                      />
-                      <h4>Edição habilitada</h4>
-                    </Grid>
-                    <br/>
-                    <Grid container xs={12}>
+
+    const handleSubmit = event => {
+      
+      var name = event.target.name.value
+      var userName = event.target.userName.value
+      var email = event.target.email.value
+      
+      event.preventDefault();
+  
+      var data = JSON.stringify({"name":name, "user_name": userName, "email": email, "function": 123});
+      console.log(data)
+
+      bmApi.put('user/' + this.state.user.id, data)
+        .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        alert('Usuario atualizado com sucesso!')
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert('Erro ao atualizar usuario!')
+      });      
+      
+    }
+
+    return (
+      <div>
+          {
+            this.state.user ?
+              <Container maxWidth="sm">
+              <form  onSubmit={handleSubmit}>
+                <Grid container direction="column" justify="space-between" alignItems="flex-start">
+                  <Grid container xs={12}>
+                    <Checkbox
+                      checked={!this.state.isEditable}
+                      onChange={() => {this.setState({ isEditable: !this.state.isEditable})}}
+                      name="checkedF"
+                      defaultChecked
+                      color="primary"
+                    />
+                    <h4>Edição habilitada</h4>
+                  </Grid>
+                  <br/>
+                  <Grid container xs={12}>
+                    <Typography color="primary" variant="h6" component="h2" >
+                        Identificação
+                        <hr/>
+                    </Typography>
+                  </Grid>
+                  <br/>
+                  <Grid container spacing={4}>
+                      <Grid item xs={12} sm={6}>
+                          <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.user.name}/>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                          <TextField disabled size="small" fullWidth variant="outlined"  name="userName" label="Nome de usuario" defaultValue={this.state.user.user_name}/>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                          <TextField disabled size="small" fullWidth variant="outlined"  name="email" label="Email" defaultValue={this.state.user.email}/>
+                      </Grid>
+                  </Grid>
+                  <br/>
+                  <Grid container xs={12}>
                       <Typography color="primary" variant="h6" component="h2" >
-                          Identificação
+                          Permições
                           <hr/>
                       </Typography>
+                  </Grid>
+                  <br/>
+                  <Grid container spacing={4}>
+                    <Grid item xs={12}> 
+                        <AsyncSelect disabled={this.state.isEditable} cacheOptions defaultOptions isMulti/>
                     </Grid>
-                    <br/>
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="name" label="Nome" defaultValue={this.state.user.name}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="user_name" label="Nome de usuario" defaultValue={this.state.user.user_name}/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField disabled={this.state.isEditable} size="small" fullWidth variant="outlined"  name="email" label="Email" defaultValue={this.state.user.email}/>
-                        </Grid>
+                  </Grid>
+                  <br/>
+                  <Grid container xs={12}>
+                    <Typography color="primary" variant="h6" component="h2" >
+                      Cadastro
+                      <hr/>
+                    </Typography>
+                  </Grid>
+                  <br/>
+                  <Grid container spacing={4}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField disabled size="small" fullWidth variant="outlined"  label="Cadastrado em" defaultValue={this.state.user.inserted_at}/>
                     </Grid>
-                    <br/>
-                    <Grid container xs={12}>
-                        <Typography color="primary" variant="h6" component="h2" >
-                            Permições
-                            <hr/>
-                        </Typography>
+                    <Grid item xs={12} sm={6}>
+                      <TextField disabled size="small" fullWidth variant="outlined"  label="Atualizado em" defaultValue={this.state.user.updated_at ? this.state.user.updated_at : this.state.user.inserted_at} />
                     </Grid>
-                    <br/>
-                    <Grid container spacing={4}>
-                      <Grid item xs={12}> 
-                          <AsyncSelect disabled={this.state.isEditable} cacheOptions defaultOptions isMulti/>
-                      </Grid>
-                    </Grid>
-                    <br/>
-                    <Grid container xs={12}>
-                      <Typography color="primary" variant="h6" component="h2" >
-                        Cadastro
-                        <hr/>
-                      </Typography>
-                    </Grid>
-                    <br/>
-                    <Grid container spacing={4}>
-                      <Grid item xs={12} sm={6}>
-                        <TextField disabled size="small" fullWidth variant="outlined"  label="Cadastrado em" defaultValue={this.state.user.inserted_at}/>
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <TextField disabled size="small" fullWidth variant="outlined"  label="Atualizado em" defaultValue={this.state.user.updated_at ? this.state.user.updated_at : this.state.user.inserted_at} />
-                      </Grid>
-                    </Grid>
-                    <br/>
-                    <Grid container xs={12} sm={12}>
-                        <Button
-                        type="submit"
-                        disableElevation
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        endIcon={<SendIcon/>}
-                        disabled={this.state.isEditable}
-                        >
-                        Alterar
-                    </Button>
+                  </Grid>
+                  <br/>
+                  <Grid container xs={12} sm={12}>
+                      <Button
+                      type="submit"
+                      disableElevation
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      endIcon={<SendIcon/>}
+                      disabled={this.state.isEditable}
+                      >
+                      Alterar
+                  </Button>
 
-                    </Grid>
-                    
                   </Grid>
                   
-              </form>        
-            </Container>
-              : 'Loading'
-            }
-        </div>
-      )
+                </Grid>
+                
+            </form>        
+          </Container>
+            : 'Loading'
+          }
+      </div>
+    )
   } 
 
 }
