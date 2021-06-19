@@ -14,17 +14,15 @@ class CreateUserForm extends React.Component{
   
   state = {
     permissions: [],
-    email: false,
-    name: false,
-    username: false
+    email: false
   };
 
   componentDidMount () {
 
     bmApi.get('permissions')
     .then(response => {
-      var data = response.data
-      const options = data.permissions.map(d => ({
+      let data = response.data
+      let options = data.permissions.map(d => ({
         "value" : d.id,
         "label" : d.name
       }))
@@ -35,15 +33,15 @@ class CreateUserForm extends React.Component{
 
   render () {
 
-    const emailValidate = (text) => {
+    const emailValidate = (text, data) => {
+      
       console.log(text);
       let reg = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w\w+)+$/;
+      this.setState({ email: true})
       if (reg.test(text)) {
-        this.setState({ email: false});
+        this.setState({ email: false}, () => sendRequest(data));        
       }
-      else {
-        this.setState({ email: true});
-      }
+      
     }
 
     const handleChangeCombo = (e) => {
@@ -52,28 +50,32 @@ class CreateUserForm extends React.Component{
       //valueTeste = b
     }
   
-    const handleSubmit = event => {
-      
-      var name = event.target.name.value
-      var userName = event.target.userName.value
-      var email = event.target.email.value
-      //var phone = event.target.phone.value
-      
-      event.preventDefault();
-      emailValidate(email)
-
-      var data = JSON.stringify({"name":name, "user_name": userName, "email": email, "function": 123});
-      console.log(data)
+    const sendRequest = (data) =>{
       
       bmApi.post('user', data)
-        .then(function (response) {
+        .then((response) => {
         console.log(JSON.stringify(response.data));
         alert('Usuario cadastrado com sucesso!')
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
         alert('Erro ao cadastrar usuario!')
-      });      
+      });
+
+    }
+
+    const handleSubmit = event => {
+      
+      let name = event.target.name.value
+      let userName = event.target.userName.value
+      let email = event.target.email.value
+      //var phone = event.target.phone.value
+      
+      event.preventDefault();
+      
+      let data = JSON.stringify({"name":name, "user_name": userName, "email": email, "function": 123});
+      console.log(data)
+      emailValidate(email, data)    
       
     }
 
@@ -156,17 +158,12 @@ class CreateUserForm extends React.Component{
                 >
                 Cadastrar
             </Button>
-
             </Grid>
-            
-          </Grid>
-          
+          </Grid>     
         </form>        
       </Container>
     )
-
   }
-
 }
 
 export default CreateUserForm;
