@@ -22,30 +22,43 @@ class CreateClientForm extends React.Component{
 
   render () {
 
+    const  data_valida = (date) => {
+
+        let matches = /(\d{4})[-./](\d{2})[-./](\d{2})/.exec(date);
+        if (matches == null) {
+            return false;
+        }
+        let dia = matches[3];
+        let mes = matches[2] - 1;
+        let ano = matches[1];
+        let data = new Date(ano, mes, dia);
+        return data.getDate() === dia && data.getMonth() === mes && data.getFullYear() === ano;
+    }
+
     const handleChangeRadio = (event) => {
       this.setState({ type: event.target.value})
     };
     const handleSubmit = event => {
         
       //indentification
-      var name = event.target.name.value
-      var document = event.target.document.value
-      var birthdate = event.target.birthdate.value
+      let name = event.target.name.value
+      let document = event.target.document.value
+      let birthdate = event.target.birthdate.value
       //address 
-      var country = event.target.country.value
-      var province = event.target.province.value
-      var city = event.target.city.value
-      var zip = event.target.zip.value
-      var street = event.target.street.value
-      var address_number = event.target.address_number.value
+      let country = event.target.country.value
+      let province = event.target.province.value
+      let city = event.target.city.value
+      let zip = event.target.zip.value
+      let street = event.target.street.value
+      let address_number = event.target.address_number.value
       //contact
-      var email = event.target.email.value
-      var phone1 = event.target.phone1.value
-      var phone2 = event.target.phone2.value
+      let email = event.target.email.value
+      let phone1 = event.target.phone1.value
+      let phone2 = event.target.phone2.value
     
       event.preventDefault();
 
-      var data = JSON.stringify({"name":name, "type":this.state.type, "document":document, "birthdate":birthdate, "addresses":[{"country": country, "province": province, "city": city, "zip": zip, "street": street, "address_number": address_number}], "email": email,"phones":[{"phone_number": phone1},{"phone_number": phone2}]});
+      let data = JSON.stringify({"name":name, "type":this.state.type, "document":document, "birthdate":birthdate, "addresses":[{"country": country, "province": province, "city": city, "zip": zip, "street": street, "address_number": address_number}], "email": email,"phones":[{"phone_number": phone1},{"phone_number": phone2}]});
     
       alert(data)
       console.log(data)
@@ -76,31 +89,51 @@ class CreateClientForm extends React.Component{
             <br/>
             <br/>
             <Grid container xs={12}>
-                <Typography color="primary" variant="h6" component="h2" >
-                    Identificação
-                    <hr/>
-                </Typography>
-
+              <Typography color="primary" variant="h6" component="h2" >
+                  Identificação
+                  <hr/>
+              </Typography>
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Name"/>
-                </Grid>
-                <Grid item xs={12} sm={6}> 
-                    <TextField size="small" fullWidth variant="outlined"  name="document" label="Documento"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="birthdate" label="Data de nascimento" helperText="AAAA-MM-DD"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Grid container item xs={12} >
-                        <RadioGroup row aria-label="gender" name="gender1" value={this.state.type} onChange={handleChangeRadio}>
-                            <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />
-                            <FormControlLabel value="LP" control={<Radio color="primary"/>} label="PJ" />
-                        </RadioGroup>       
-                    </Grid>   
-                </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small"
+                  fullWidth 
+                  variant="outlined"  
+                  name="name" 
+                  label="Name"
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}> 
+                <TextField 
+                  size="small" 
+                  fullWidth 
+                  variant="outlined"  
+                  name="document" 
+                  label="Documento"
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  fullWidth 
+                  variant="outlined"  
+                  name="birthdate" 
+                  label="Data de nascimento" 
+                  helperText="AAAA-MM-DD"
+                  />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Grid container item xs={12} >
+                  <RadioGroup row aria-label="gender" name="gender1" value={this.state.type} onChange={handleChangeRadio}>
+                    <FormControlLabel value="NP" control={<Radio color="primary"/>} label="PF" />
+                    <FormControlLabel value="LP" control={<Radio color="primary"/>} label="PJ" />
+                  </RadioGroup>       
+                </Grid>   
+              </Grid>
             </Grid>
 
 
@@ -113,48 +146,103 @@ class CreateClientForm extends React.Component{
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="country" label="Pais"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="province" label="Estado"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="city" label="Cidade"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="zip" label="CEP"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="street" label="Rua"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="address_number" label="Numero"/>
-                </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth 
+                  name="country" 
+                  label="Pais"
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth 
+                  name="province" 
+                  label="Estado"
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth 
+                  name="city" 
+                  label="Cidade"
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth name="zip" 
+                  label="CEP"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth 
+                  name="street" 
+                  label="Rua"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth 
+                  name="address_number" 
+                  label="Numero"
+                />
+              </Grid>
             </Grid>
-
             <br/>
             <Grid container xs={12}>
-                <Typography color="primary" variant="h6" component="h2" >
-                    Contato
-                    <hr/>
-                </Typography>
+              <Typography color="primary" variant="h6" component="h2" >
+                Contato
+                <hr/>
+              </Typography>
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="email" label="Email"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="phone1" label="Telefone 1"/>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" variant="outlined" fullWidth name="phone2" label="Telefone 2"/>
-                </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth 
+                  name="email" 
+                  label="Email"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth name="phone1" 
+                  label="Telefone 1"
+                  required
+                  />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  variant="outlined" 
+                  fullWidth 
+                  name="phone2" 
+                  label="Telefone 2"
+                />
+              </Grid>
             </Grid>
             <br/>
             <Grid container xs={12} sm={12}>
-                <Button
+              <Button
                 type="submit"
                 disableElevation
                 variant="contained"
@@ -163,18 +251,13 @@ class CreateClientForm extends React.Component{
                 endIcon={<SendIcon/>}
                 >
                 Cadastrar
-            </Button>
-
+              </Button>
             </Grid>
-            
           </Grid>
-          
         </form>        
       </Container>
-    )
-    
+    ) 
   }
-
 }
 
 export default CreateClientForm;
