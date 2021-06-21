@@ -10,26 +10,23 @@ import bmApi from '../../../bm-api-config/BmApi';
 
 class CreateSubprocessForm extends React.Component{
 
-  componentDidMount () {
-
-  }
-
   render () {
 
     const handleSubmit = event => {
-      var name = event.target.name.value
-      var limit_time = event.target.limit_time.value
-  
-      event.preventDefault();//stop to reload the page
       
-      var data = JSON.stringify({"name":name,"limit_time":limit_time});
+      event.preventDefault();//stop to reload the page
+
+      let name = event.target.name.value
+      let limit_time = event.target.limit_time.value
+
+      let data = JSON.stringify({"name":name,"limit_time":limit_time});
       
       bmApi.post('subprocess', data)
-      .then(function (response) {
+      .then((response) => {
         console.log(JSON.stringify(response.data));
         alert('Subprocesso cadastrado com sucesso!')
       })
-      .catch(function (error) {
+      .catch((error) => {
         alert('Erro ao cadastrar subprocesso')
         console.log(error);
       });
@@ -58,16 +55,32 @@ class CreateSubprocessForm extends React.Component{
             </Grid>
             <br/>
             <Grid container spacing={4}>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="name" label="Nome" />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField size="small" fullWidth variant="outlined"  name="limit_time" label="Tempo Limite" helperText="Em horas" />
-                </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  fullWidth 
+                  variant="outlined"  
+                  name="name" 
+                  label="Nome"
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField 
+                  size="small" 
+                  fullWidth 
+                  variant="outlined"  
+                  name="limit_time" 
+                  label="Tempo Limite" 
+                  required
+                  helperText="Em horas"
+                  type="number" 
+                />
+              </Grid>
             </Grid>
             <br/>
             <Grid container xs={12} sm={12}>
-                <Button
+              <Button
                 type="submit"
                 disableElevation
                 variant="contained"
@@ -76,16 +89,13 @@ class CreateSubprocessForm extends React.Component{
                 endIcon={<SendIcon/>}
                 >
                 Cadastrar
-                </Button>
+              </Button>
             </Grid>
-            
           </Grid> 
         </form>        
       </Container>
     )
-
   }
-
 }
 
 export default CreateSubprocessForm;
