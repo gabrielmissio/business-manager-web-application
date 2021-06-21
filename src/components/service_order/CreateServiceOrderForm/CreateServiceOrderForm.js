@@ -27,39 +27,42 @@ class CreateServiceOrderForm extends React.Component {
         
         bmApi.get('process')
         .then(response => {
-            var data = response.data
-            const options = data.process.map(d => ({
+            let data = response.data
+            let options = data.process.map(d => ({
                 "value" : d.id,
                 "label" : d.name
             }))
             this.setState({ process: options}, () => loadSubprocessOptions());
         });        
-        //
+        
         bmApi.get('client')
         .then(response => {
-            var data = response.data
-            const options = data.clients.map(d => ({
+            let data = response.data
+            let options = data.clients.map(d => ({
                 "value" : d.id,
                 "label" : d.name
             }))
             this.setState({ client: options});
         }); 
-        //
+        
         const loadSubprocessOptions = () => {
+            
             bmApi.get('process/'+this.state.selectedProcessId)
             .then(response => {
-                var data = response.data
-                const options = data.subprocess.map(d => ({
+                let data = response.data
+                let options = data.subprocess.map(d => ({
                   "value" : d.id,
                   "label" : d.name
                 }))
                 this.setState({ subprocess: options});
             });
-          }
+
+        }
 
     }
 
     render() {
+
         const handleChangeComboProcess = (e) => {
             this.setState({ selectedProcessId: e.value, selectedProcessName: e.label}, () => loadSubprocessOptions(),  this.setState({ selectedSubprocessId: -1, selectedSubprocessName: '*Selecione o subprocesso*'}));
         }
@@ -73,31 +76,36 @@ class CreateServiceOrderForm extends React.Component {
         }
     
         const loadSubprocessOptions = () => {
+
             bmApi.get('process/'+this.state.selectedProcessId)
             .then(response => {
-                var data = response.data
-                const options = data.subprocess.map(d => ({
+                let data = response.data
+                let options = data.subprocess.map(d => ({
                     "value" : d.id,
                     "label" : d.name
                 }))
                 this.setState({ subprocess: options});
             });
+
         }
 
         const handleSubmit = event => {
 
             event.preventDefault();
-        
-            var data = JSON.stringify({"client_id": this.state.selectedClientId, "current_process_id": this.state.selectedProcessId, "current_subprocess_id": this.state.selectedSubprocessId, "user_id": window.sessionStorage.getItem('currentUser')});
-            
-            
-            alert(data)
+
+            if (this.state.selectedClientId === -1 || this.state.selectedProcessId === -1 || this.state.selectedSubprocessId === -1){
+                alert('Erro: Para abrir uma nova O.S. é necessario selecionar o cliente, processo e o subprocess')
+                return;
+            }
+
+            let data = JSON.stringify({"client_id": this.state.selectedClientId, "current_process_id": this.state.selectedProcessId, "current_subprocess_id": this.state.selectedSubprocessId, "user_id": window.sessionStorage.getItem('currentUser')});
+                        
             bmApi.post('service-order', data)
-            .then(function (response) {
+            .then((response) => {
                 console.log(JSON.stringify(response.data));
                 alert('O.S. cadastrada com sucesso!')
             })
-            .catch(function (error) {
+            .catch((error) => {
                 console.log(error);
                 alert('Erro ao cadastrar O.S.!')
             });
@@ -192,7 +200,6 @@ class CreateServiceOrderForm extends React.Component {
               </form>        
             </Container>
         )
-
     } 
 }
 
