@@ -63,11 +63,11 @@ class CreateClientForm extends React.Component{
       alert(data)
       console.log(data)
       bmApi.post('client', data)
-      .then(function (response) {
+      .then((response) => {
         console.log(JSON.stringify(response.data));
         alert('Cliente cadastrado com sucesso!')
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
         alert('Erro ao cadastrar cliente!')
       });
