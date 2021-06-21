@@ -22,7 +22,7 @@ class CreateClientForm extends React.Component{
 
   render () {
 
-    const  data_valida = (date) => {
+    /*const  data_valida = (date) => {
 
         let matches = /(\d{4})[-./](\d{2})[-./](\d{2})/.exec(date);
         if (matches == null) {
@@ -33,7 +33,7 @@ class CreateClientForm extends React.Component{
         let ano = matches[1];
         let data = new Date(ano, mes, dia);
         return data.getDate() === dia && data.getMonth() === mes && data.getFullYear() === ano;
-    }
+    }*/
 
     const handleChangeRadio = (event) => {
       this.setState({ type: event.target.value})
